@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
-using TaskHub.Common;
 using TaskHub.DAL;
 using TaskHub.Model;
 using TaskHub.Models;
-using TaskHub.Views;
 
 namespace TaskHub.ViewModels
 {
@@ -30,6 +25,14 @@ namespace TaskHub.ViewModels
         private UserModel _User;
         private List<TaskModel> data = new List<TaskModel>();
         private TaskModel _TaskModel;
+        //private ObservableCollection<TaskCardViewModel> _Cards;
+
+        //public ObservableCollection<TaskCardViewModel> Cards
+        //{
+        //    get { return _Cards; }
+        //    set { _Cards = value; }
+        //}
+
 
         public TaskModel taskModel
         {

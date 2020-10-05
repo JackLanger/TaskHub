@@ -23,6 +23,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="6"
                    Background="#1e272e">
 
@@ -79,13 +80,14 @@
                 Margin="0"
                 Padding="0"
                 MinHeight="200"
-                Name="MainFrame"
+                x:Name="MainFrame"
                 NavigationUIVisibility="Hidden"
-                ScrollViewer.CanContentScroll="True"
-                ScrollViewer.VerticalScrollBarVisibility="Auto"
-                >
+                />
 
-        </Frame>
+
+        <local:TaskCardListControll/>
+
+
         <!--Row3-->
         <!--Row4-->
         <!--Row5-->

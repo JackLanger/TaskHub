@@ -1,20 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data.Linq;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using TaskHub.Model;
 using TaskHub.Models.events;
 using TaskHub.ViewModels;
 using TaskHub.Views;
@@ -29,12 +15,10 @@ namespace TaskHub
     {
         DataGridView dataGridView = new DataGridView();
         NewTaskView newTaskView = new NewTaskView();
-        DetailView detailView = new DetailView();
         HomeView homeView = new HomeView();
         CardView cardView = new CardView();
 
         MainViewModel main = new MainViewModel();
-
 
         public MainWindow()
         {
@@ -53,21 +37,15 @@ namespace TaskHub
             /*-----Subscribe to events------*/
             newTaskView.SubmitButtonPressed += NewTaskView_SubmitButtonPressed;
             dataGridView.TasksList.SelectedCellsChanged += TasksList_SelectedCellsChanged;
-            dataGridView.TasksList.MouseDoubleClick += TasksList_MouseDoubleClick;
 
         }
 
 
-        private void TasksList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            if (detailView != null && main.ActiveTask != null)
-                MainFrame.Content = detailView;
-        }
 
         private void TasksList_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
             main.UpdateTaskModel(dataGridView.TasksList.SelectedItem);
-            detailView.DataContext = main.ActiveTask;
+            
         }
 
         private void CmbFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -4,11 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TaskHub"
-             xmlns:ViewModels="clr-namespace:TaskHub.ViewModels" 
-             x:Class="TaskHub.TaskCardControll"
-             mc:Ignorable="d" 
+             xmlns:ViewModels="clr-namespace:TaskHub.ViewModels" x:Class="TaskHub.TaskCardControll"
+             mc:Ignorable="d" Height="300" Width="225"
              d:DesignHeight="300" d:DesignWidth="200">
-
     <UserControl.Template>
         <ControlTemplate>
 
@@ -17,6 +15,7 @@
                 Background="White"
                 BorderBrush="{StaticResource LondonSquareBrush}"
                 BorderThickness="1"
+                Margin="10"
                 >
                 <Border.BitmapEffect>
                     <DropShadowBitmapEffect
@@ -29,7 +28,7 @@
                                 />
                 </Border.BitmapEffect>
 
-                <Grid>
+                <Grid  DataContext="{ Binding TaskCardViewModel}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="5"/>
                         <RowDefinition Height="auto"/>
@@ -37,33 +36,129 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
                         <RowDefinition Height="5"/>
                     </Grid.RowDefinitions>
+                    
 
-                    <Border
+
+                        <Border
                         Grid.Row="1"
                         Width="190"
                         Height="auto"
                         MinHeight="33"
                         
                         >
-                        <Border
+                            <Border
                             Background="{StaticResource MintGreenBrush}"
                             CornerRadius="15"
                             >
-                            <TextBox
+                                <TextBox
                                 Background="{StaticResource MintGreenBrush}"
                                 BorderThickness="0"
                                 Width="160"
                                 TextWrapping="Wrap"
                                 Text="{Binding TaskName}"
                                 >
-                            </TextBox>
+                                </TextBox>
+                            </Border>
                         </Border>
-                        
-                    </Border>
+                    <TextBlock
+                        Width="180"
+                        HorizontalAlignment="Center"
+                        Margin="5"
+                        Padding="5"
+                        Grid.Row="2"
+                        Text="{Binding}"
+                        ></TextBlock>
+
+                    <TextBox 
+                                Grid.Row="3"
+                                Text="{Binding TaskDescription}"
+                                TextWrapping="Wrap"
+                                Margin="5"
+                                Padding="5"
+                                BorderBrush="White"
+                                />
+                    <TextBlock 
+                                Grid.Row="5"
+                                Text="{Binding PostedBy}"
+                                Margin="5"
+                                />
+                    <TextBlock 
+                                Grid.Row="4"
+                                Margin="5"
+                                Text="{Binding DateAdded, Mode=OneWay}"
+                                />
 
 
+                    <!--button controll-->
+
+                    <StackPanel
+                                Grid.Row="6"
+                                HorizontalAlignment="Left"
+                                FlowDirection="LeftToRight"
+                                Orientation="Horizontal"                               
+                                >
+
+                        <StackPanel.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Width" Value="50"/>
+                                <Setter Property="Margin" Value="5 0"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="HorizontalAlignment"  Value="Left"/>
+                                <Setter Property="VerticalAlignment"    Value="Center"/>
+                                <Setter Property="Background" Value="White" />
+                                <Setter Property="Height" Value="23" />
+                                <Setter Property="BorderBrush" Value="#485460"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#0fbcf9"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+
+                        </StackPanel.Resources>
+
+                        <Button Content="Delete">
+                            <Button.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                        <Button Content="Done">
+                            <Button.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+
+                        <Button 
+                                    Content="{Binding TaskStatus}"
+                                    Width="70"
+                                    Height="25"
+                                    Background="#0be881"
+                                    BorderBrush="#0be881"
+                                    Name="BtnStatus" 
+                                    FontWeight="SemiBold"
+                                    FontSize="13"
+                                    VerticalAlignment="Center"
+                                        >
+
+                            <Button.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True"/>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                    </StackPanel>
                 </Grid>
             </Border>
         </ControlTemplate>

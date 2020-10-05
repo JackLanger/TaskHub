@@ -156,7 +156,7 @@
                                         </Style>
                                     </Button.Resources>
                                 </Button>
-                                
+
                                 <Button 
                                     Content="{Binding TaskStatus}"
                                     Width="70"
@@ -178,8 +178,6 @@
                                         </Style>
                                     </Button.Resources>
                                 </Button>
-
-                                
                             </StackPanel>
                         </Grid>
                     </Border>
