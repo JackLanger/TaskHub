@@ -117,6 +117,8 @@
     <Compile Include="Models\ActivityCheck.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\TaskCardListViewModel.cs" />
+    <Compile Include="ViewModels\TaskCardViewModel.cs" />
     <Compile Include="Views\CardView.xaml.cs">
       <DependentUpon>CardView.xaml</DependentUpon>
     </Compile>

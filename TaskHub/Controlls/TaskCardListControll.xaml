@@ -26,7 +26,8 @@
         
         <ScrollViewer
             >
-            <ItemsControl>
+            <ItemsControl
+                >
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <local:TaskCardControll/>
