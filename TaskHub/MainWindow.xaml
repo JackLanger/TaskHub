@@ -46,7 +46,9 @@
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Border Background="{TemplateBinding Background}">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <ContentPresenter 
+                                        HorizontalAlignment="Center" 
+                                        VerticalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
@@ -71,24 +73,9 @@
 
         </StackPanel>
         
-            
-            
-
         <!--Row1-->
-        
-
-        
         <!--Row2-->
-
-        <ScrollViewer 
-            Grid.Row="0"
-            Grid.RowSpan="3"
-            Grid.Column="1"
-            Grid.ColumnSpan="2"
-            >
-            
-        
-            <Frame 
+        <Frame 
                 Margin="0"
                 Padding="0"
                 MinHeight="200"
@@ -98,9 +85,7 @@
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
                 >
 
-            </Frame>
-        </ScrollViewer>
-
+        </Frame>
         <!--Row3-->
         <!--Row4-->
         <!--Row5-->

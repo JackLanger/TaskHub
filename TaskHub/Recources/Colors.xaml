@@ -1,0 +1,35 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:TaskHub.Recources" 
+                    xmlns:Color="clr-namespace:System;assembly=mscorlib">
+
+    <Color x:Key="BlackPearl">#1e272e</Color>
+    <SolidColorBrush x:Key="BlacPearlBrush" Color="{StaticResource BlackPearl}" />
+    
+    <Color x:Key="GoodNight">#485460</Color>
+    <SolidColorBrush x:Key="GoodNightBrush" Color="{StaticResource GoodNight}" />
+    
+    <Color x:Key="LondonSquare">#808e9b</Color>
+    <SolidColorBrush x:Key="LondonSquareBrush" Color="{StaticResource LondonSquare}" />
+    
+    <Color x:Key="HintOfElusiveBlue">#d2dae2</Color>
+    <SolidColorBrush x:Key="HintOfElusiveBlueBrush" Color="{StaticResource HintOfElusiveBlue}" />
+    
+    <Color x:Key="FreshTurqoise">#34e7e4</Color>
+    <SolidColorBrush x:Key="FreshTurqoiseBrush" Color="{StaticResource FreshTurqoise}" />
+    
+    <Color x:Key="MintGreen">#0be881</Color>
+    <SolidColorBrush x:Key="MintGreenBrush" Color="{StaticResource MintGreen}" />
+    
+    <Color x:Key="GreanTeal">#05c46b</Color>
+    <SolidColorBrush x:Key="GreanTealBrush" Color="{StaticResource GreanTeal}" />
+
+    <Color x:Key="FreshSpeachBlue">#3c40c6</Color>
+    <SolidColorBrush x:Key="FreshSpeachBlueBrush" Color="{StaticResource FreshSpeachBlue}" />
+
+    <Color x:Key="ChromeYellow">#ffa801</Color>
+    <SolidColorBrush x:Key="ChromeYellowBrush" Color="{StaticResource ChromeYellow}" />
+    
+
+
+</ResourceDictionary>

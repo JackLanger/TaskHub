@@ -40,7 +40,7 @@ namespace TaskHub
         {
 
             InitializeComponent();
-            MainFrame.Content = dataGridView;
+            MainFrame.Content = cardView;
 
 
             dataGridView.CmbFilter.ItemsSource = Enum.GetValues(typeof(ActivityCheck));
