@@ -26,8 +26,6 @@
 
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="6"
                    Background="#1e272e">
-
-
             <StackPanel.Resources>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Foreground" Value="#34e7e4"/>
@@ -40,7 +38,7 @@
                     <Setter Property="Cursor" Value="Hand"/>
                     <Setter Property="FontWeight" Value="Bold"/>
                     <Setter Property="FontSize"  Value="10"/>
-                    
+
                     <!--this is the mouse overpart-->
 
                     <Setter Property="Template">
@@ -57,11 +55,12 @@
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" Value="#485460"/>
+                            <Setter Property="BorderThickness" Value="3" />
                         </Trigger>
                     </Style.Triggers>
 
                 </Style>
-                
+
             </StackPanel.Resources>
 
             <Button Click="Home_Click" >Home</Button>
@@ -73,28 +72,19 @@
             <Button >Exit</Button>
 
         </StackPanel>
-        
         <!--Row1-->
         <!--Row2-->
         <Frame 
+            Grid.Row="2"
+            Grid.Column="1"
                 Margin="0"
                 Padding="0"
                 MinHeight="200"
-                x:Name="MainFrame"
-                NavigationUIVisibility="Hidden"
+                Name="MainFrame"
                 />
-
-
-        <local:TaskCardListControll/>
-
-
         <!--Row3-->
         <!--Row4-->
         <!--Row5-->
         <!--Row6-->
-
-        
-
-
     </Grid>
 </Window>

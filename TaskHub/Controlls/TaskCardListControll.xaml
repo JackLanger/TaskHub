@@ -24,6 +24,8 @@
             <Setter Property="Background" Value="{StaticResource BlacPearlBrush}" />
         </Style>
     </UserControl.Resources>
+
+
     <Grid 
         Background="{StaticResource HintOfElusiveBlueBrush}"
         >
@@ -31,22 +33,19 @@
             <ViewModels:MainViewModel/>
         </Grid.DataContext>
 
-        <ScrollViewer
-            >
-
-            <WrapPanel>
-                <ItemsControl 
+        <ScrollViewer>
+            <ItemsControl 
                     ItemsSource="{Binding TasksList}"
                     Margin="5"
                     Padding="5"
                     >
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <local:TaskCardControll/>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </WrapPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:TaskCardControll/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </ScrollViewer>
     </Grid>
 </UserControl>
