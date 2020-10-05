@@ -25,6 +25,14 @@ namespace TaskHub.ViewModels
         private UserModel _User;
         private List<TaskModel> data = new List<TaskModel>();
         private TaskModel _TaskModel;
+        private TaskCardViewModel _TaskCardVM;
+
+        public TaskCardViewModel TaskCardVM
+        {
+            get { return _TaskCardVM; }
+            set { _TaskCardVM = value; }
+        }
+
 
 
         public TaskModel taskModel
