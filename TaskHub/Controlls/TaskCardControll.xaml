@@ -7,9 +7,12 @@
              xmlns:ViewModels="clr-namespace:TaskHub.ViewModels" x:Class="TaskHub.TaskCardControll"
              mc:Ignorable="d" Height="300" Width="225"
              d:DesignHeight="300" d:DesignWidth="200">
+    <UserControl.DataContext>
+        <ViewModels:TaskCardListViewModel/>
+    </UserControl.DataContext>
     <UserControl.Template>
         <ControlTemplate>
-
+            
             <Border 
                 CornerRadius="10"
                 Background="White"
@@ -28,7 +31,7 @@
                                 />
                 </Border.BitmapEffect>
 
-                <Grid  DataContext="{ Binding TaskCardViewModel}">
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="5"/>
                         <RowDefinition Height="auto"/>
@@ -39,38 +42,35 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="5"/>
                     </Grid.RowDefinitions>
-                    
 
 
-                        <Border
+
+                    <Border
                         Grid.Row="1"
                         Width="190"
                         Height="auto"
                         MinHeight="33"
                         
                         >
-                            <Border
+                        <Border
                             Background="{StaticResource MintGreenBrush}"
                             CornerRadius="15"
                             >
-                                <TextBox
+                            <TextBox
                                 Background="{StaticResource MintGreenBrush}"
                                 BorderThickness="0"
                                 Width="160"
                                 TextWrapping="Wrap"
+                                FontSize="12"
+                                FontWeight="SemiBold"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                TextAlignment="Center"
                                 Text="{Binding TaskName}"
                                 >
-                                </TextBox>
-                            </Border>
+                            </TextBox>
                         </Border>
-                    <TextBlock
-                        Width="180"
-                        HorizontalAlignment="Center"
-                        Margin="5"
-                        Padding="5"
-                        Grid.Row="2"
-                        Text="{Binding}"
-                        ></TextBlock>
+                    </Border>
 
                     <TextBox 
                                 Grid.Row="3"

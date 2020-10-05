@@ -25,13 +25,6 @@ namespace TaskHub.ViewModels
         private UserModel _User;
         private List<TaskModel> data = new List<TaskModel>();
         private TaskModel _TaskModel;
-        //private ObservableCollection<TaskCardViewModel> _Cards;
-
-        //public ObservableCollection<TaskCardViewModel> Cards
-        //{
-        //    get { return _Cards; }
-        //    set { _Cards = value; }
-        //}
 
 
         public TaskModel taskModel
@@ -78,6 +71,7 @@ namespace TaskHub.ViewModels
         public MainViewModel()
         {
             data = DataAccess.ReadTaskDB().ToList();
+
             _ActiveTask = new TaskModel("jack is great", "jack", "hack this", ActivityCheck.active.ToString(), true);
             
             TasksList = new ObservableCollection<TaskModel>();
