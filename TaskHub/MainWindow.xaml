@@ -64,7 +64,7 @@
             <Button Click="Home_Click" >Home</Button>
             <Button Click="ShowData_Click">show Tasks</Button>
             <Button Click="AddData_Click">add Task</Button>
-            <Button Click="AddData_Click">Edit Task</Button>
+            <Button Click="CardView_Click">Card view</Button>
             <Button Click="AddData_Click" IsEnabled="False"></Button>
             <Button Click="AddData_Click" >Profile</Button>
             <Button >Exit</Button>
@@ -89,6 +89,8 @@
             MinHeight="200"
             Name="MainFrame"
             NavigationUIVisibility="Hidden"
+            ScrollViewer.CanContentScroll="True"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
             >
 
         </Frame>
