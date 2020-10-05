@@ -7,7 +7,9 @@
       xmlns:ViewModels="clr-namespace:TaskHub.ViewModels" x:Class="TaskHub.Views.CardView"
       mc:Ignorable="d" 
       Width="auto" Height="auto"
-      Title="CardView">
+      Title="CardView"
+    Background="white"
+    >
     <Page.DataContext>
         <ViewModels:MainViewModel/>
     </Page.DataContext>
@@ -43,16 +45,90 @@
                         BorderBrush="#808e9b" 
                         BorderThickness="2"
                         CornerRadius="8" 
+                        Background="white"
+                        
                         >
-                        <StackPanel 
-                            Height="250"
-                            Width="150"
-                            >
-                            <TextBlock Text="{Binding TaskStatus}"/>
-                            <TextBlock Text="{Binding TaskName}"/>
-                            <TextBlock Text="{Binding PostedBy}"/>
-                            <TextBlock Text="{Binding DateAdded, Mode=OneWay}"/>
-                        </StackPanel>
+                        <Border.BitmapEffect>
+                            <DropShadowBitmapEffect
+                                Color="#808e9b" 
+                                Direction="-50" 
+                                Opacity="0.3" 
+                                Softness="0.2"
+                                ShadowDepth="7"
+                                
+                                />
+                        </Border.BitmapEffect>
+
+                        <Grid 
+                            Width="200"
+                            Height="300">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="33"/>
+                            </Grid.RowDefinitions>
+
+                            <Border
+                                Grid.Row="0"
+                                BorderBrush="#34e7e4"
+                                BorderThickness="1"
+                                CornerRadius="8"
+                                Width="200"
+                                Height="auto"
+                                Background="#34e7e4"
+                                HorizontalAlignment="Center"
+                                Margin=" 0 5"
+                                Padding="5"
+                                >
+                                
+                            <TextBlock 
+                                Text="{Binding TaskName}"
+                                FontSize="20"
+                                TextAlignment="Center"
+                                TextWrapping="Wrap"
+                                />
+                            </Border>
+                                       <Border
+                                           Grid.Row="4"
+                                           BorderBrush="#0be881"
+                                           BorderThickness="1"
+                                           CornerRadius="8"
+                                           Width="70"
+                                           Background="#0be881"
+                                           HorizontalAlignment="Right"
+                                           Margin="5"
+                                           >
+                            <TextBlock 
+                                Text="{Binding TaskStatus}"
+                                TextAlignment="Center"
+                                FontWeight="SemiBold"
+                                FontSize="15"
+                                       />
+                                       </Border>
+
+                            <TextBlock 
+                                Grid.Row="1"
+                                Text="{Binding TaskDescription}"
+                                TextWrapping="Wrap"
+                                Margin="5"
+                                Padding="5"
+                                />
+
+
+                            <TextBlock 
+                                Grid.Row="2"
+                                Text="{Binding PostedBy}"
+                                Margin="5"
+                                />
+                            <TextBlock 
+                                Grid.Row="3"
+                                Margin="5"
+                                Text="{Binding DateAdded, Mode=OneWay}"
+                                />
+                        
+                        </Grid>
                     </Border>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
