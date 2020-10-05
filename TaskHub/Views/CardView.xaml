@@ -127,7 +127,39 @@
                                 Margin="5"
                                 Text="{Binding DateAdded, Mode=OneWay}"
                                 />
-                        
+                            <Border
+                                Grid.Row="4"
+                                BorderBrush="#485460"
+                                BorderThickness="2"
+                                Width="50"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                CornerRadius="10"
+                                Cursor="Hand"
+                                >
+                                
+                            <AccessText
+                                TextAlignment="Center"
+                                >_Delete</AccessText>
+                            </Border>
+                            
+                            <Border
+                                Grid.Row="4"
+                                BorderBrush="#485460"
+                                BorderThickness="2"
+                                Width="50"
+                                Margin="60 0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                CornerRadius="10"
+                                Cursor="Hand"
+                                >
+
+                                <AccessText
+                                TextAlignment="Center"
+                                >_Edit</AccessText>
+                            </Border>
+
                         </Grid>
                     </Border>
                 </DataTemplate>

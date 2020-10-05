@@ -79,23 +79,28 @@
 
         
         <!--Row2-->
-        <Frame 
-            Grid.Row="0" 
-            Grid.RowSpan="3" 
-            Grid.Column="1" 
+
+        <ScrollViewer 
+            Grid.Row="0"
+            Grid.RowSpan="3"
+            Grid.Column="1"
             Grid.ColumnSpan="2"
-            Margin="0"
-            Padding="0"
-            MinHeight="200"
-            Name="MainFrame"
-            NavigationUIVisibility="Hidden"
-            ScrollViewer.CanContentScroll="True"
-            ScrollViewer.VerticalScrollBarVisibility="Auto"
             >
-
-        </Frame>
-
+            
         
+            <Frame 
+                Margin="0"
+                Padding="0"
+                MinHeight="200"
+                Name="MainFrame"
+                NavigationUIVisibility="Hidden"
+                ScrollViewer.CanContentScroll="True"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                >
+
+            </Frame>
+        </ScrollViewer>
+
         <!--Row3-->
         <!--Row4-->
         <!--Row5-->
