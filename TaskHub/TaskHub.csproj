@@ -42,6 +42,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -51,6 +52,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -95,6 +97,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controlls\Commands\RelayCommand.cs" />
     <Compile Include="Controlls\TaskCardControll.xaml.cs">
       <DependentUpon>TaskCardControll.xaml</DependentUpon>
     </Compile>
@@ -107,17 +110,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TaskData.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Enumeration\ApplicationPage.cs" />
     <Compile Include="Models\events\InvalidInputEventArgs.cs" />
     <Compile Include="Models\events\NewEntryEventArgs.cs" />
     <Compile Include="Models\events\StatusUpdateEventArgs.cs" />
     <Compile Include="Models\Exeption\InvalidInputException.cs" />
-    <Compile Include="Models\ModelBase.cs" />
+    <Compile Include="ViewModels\Base\ModelBase.cs" />
     <Compile Include="Models\TaskModel.cs" />
-    <Compile Include="Models\ActivityCheck.cs" />
+    <Compile Include="Models\Enumeration\ActivityCheck.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="ValueConverters\AppPageValueConverter.cs" />
+    <Compile Include="ValueConverters\BaseValueConverter.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\TaskCardListViewModel.cs" />
-    <Compile Include="ViewModels\TaskCardViewModel.cs" />
     <Compile Include="Views\CardView.xaml.cs">
       <DependentUpon>CardView.xaml</DependentUpon>
     </Compile>
@@ -129,9 +133,6 @@
     </Compile>
     <Compile Include="Views\NewTaskView.xaml.cs">
       <DependentUpon>NewTaskView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\test.xaml.cs">
-      <DependentUpon>test.xaml</DependentUpon>
     </Compile>
     <Page Include="Controlls\TaskCardControll.xaml">
       <SubType>Designer</SubType>
@@ -170,10 +171,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\NewTaskView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\test.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

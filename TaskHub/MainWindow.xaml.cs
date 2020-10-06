@@ -23,8 +23,9 @@ namespace TaskHub
         public MainWindow()
         {
 
+            DataContext = main;
+
             InitializeComponent();
-            MainFrame.Content = taskCardListControll;
 
             dataGridView.CmbFilter.ItemsSource = Enum.GetValues(typeof(ActivityCheck));
             dataGridView.CmbFilter.SelectedIndex = 0;
