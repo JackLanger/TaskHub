@@ -31,35 +31,25 @@ namespace TaskHub.ViewModels
         private List<TaskModel> data = new List<TaskModel>();
         private TaskModel _ActiveTask;
         private TaskModel _TaskModel;
+        private ApplicationPage _CurrentPage = ApplicationPage.Home;
 
 
         #endregion
 
-        #region public members
-        public ICommand HomeCommand { get; set; }
-        private ICommand _NewTaskCommand;
-
-
-
-        public ICommand DataGridCommand { get; set; }
-        public ICommand DeleteTaskCommand { get; set; }
-        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.Home;
-        
-
-
-        //task not working overwork needed
-        public ICommand NewTaskCommand
+        #region public propertys
+        public ApplicationPage CurrentPage
         {
-            get
-            {
-                if (_NewTaskCommand == null )
-                {
-                    _NewTaskCommand = new RelayCommand(
-                        () => NewTask());
-                }
-                return _NewTaskCommand;
+            get => _CurrentPage;
+            set 
+            { 
+                _CurrentPage = value;
+                OnPropertyChanged();
             }
         }
+
+
+
+        
 
         public TaskModel taskModel
         {
@@ -92,6 +82,64 @@ namespace TaskHub.ViewModels
         #endregion
 
 
+
+        #region commands
+
+        /// <summary>
+        /// TODO: create all task commands needed for nav buttons and the card buttons
+        /// </summary>
+        /// 
+
+
+
+
+        private ICommand _NewTaskCommand;
+        private ICommand _HomeCommand;
+        private ICommand _DataGridCommand;
+
+
+        public ICommand Home
+        {
+            get
+            {
+                if (_HomeCommand == null)
+                {
+                    _HomeCommand = new RelayCommand(
+                        () => CurrentPage = ApplicationPage.Home);
+                }
+                return _NewTaskCommand;
+            }
+        }
+
+        public ICommand DataGrid
+        {
+            get
+            {
+                if (_DataGridCommand == null)
+                {
+                    _DataGridCommand = new RelayCommand(
+                        () => CurrentPage = ApplicationPage.DataGrid);
+                }
+                return _NewTaskCommand;
+            }
+        }
+
+
+        public ICommand NewTaskCommand
+        {
+            get
+            {
+                if (_NewTaskCommand == null)
+                {
+                    _NewTaskCommand = new RelayCommand(
+                        () => CurrentPage = ApplicationPage.NewTask);
+                }
+                return _NewTaskCommand;
+            }
+        }
+
+        #endregion
+
         protected void NotifyPropertyChanged([CallerMemberName]String info = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(info));
         
 
@@ -104,8 +152,6 @@ namespace TaskHub.ViewModels
             data = DataAccess.ReadTaskDB().ToList();
             TasksList = new ObservableCollection<TaskModel>();
 
-            // TODO:create the commands
-
 
             foreach (var task in DataAccess.ReadTaskDB())
             {
@@ -117,7 +163,7 @@ namespace TaskHub.ViewModels
 
         #endregion
 
-        public void NewTask() => CurrentPage = ApplicationPage.NewTask;
+
 
         internal void UpdateTaskModel(Object task)
         {
