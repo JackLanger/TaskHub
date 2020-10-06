@@ -15,7 +15,6 @@ namespace TaskHub
     {
         DataGridView dataGridView = new DataGridView();
         NewTaskView newTaskView = new NewTaskView();
-        HomeView homeView = new HomeView();
         CardView cardView = new CardView();
 
         MainViewModel main = new MainViewModel();
@@ -59,6 +58,6 @@ namespace TaskHub
         private void ShowData_Click(object sender, RoutedEventArgs e) => MainFrame.Content = dataGridView ?? new DataGridView();
         void AddData_Click(object sender, RoutedEventArgs e) => MainFrame.Content = newTaskView ?? new NewTaskView();
         void CardView_Click(object sender, RoutedEventArgs e) => MainFrame.Content = cardView ?? new CardView();
-        private void Home_Click(object sender, RoutedEventArgs e) => MainFrame.Content = homeView ?? new HomeView();
+        private void Home_Click(object sender, RoutedEventArgs e) => MainFrame.Content = taskCardListControll ?? new TaskCardListControll();
     }
 }

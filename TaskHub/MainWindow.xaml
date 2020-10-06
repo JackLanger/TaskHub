@@ -64,7 +64,7 @@
             </StackPanel.Resources>
 
             <Button Click="Home_Click" >Home</Button>
-            <Button Click="ShowData_Click">show Tasks</Button>
+            <Button Click="ShowData_Click">Grid view</Button>
             <Button Click="AddData_Click">add Task</Button>
             <Button Click="CardView_Click">Card view</Button>
             <Button Click="AddData_Click" IsEnabled="False"></Button>
@@ -77,10 +77,11 @@
         <Frame 
             Grid.Row="2"
             Grid.Column="1"
-                Margin="0"
-                Padding="0"
-                MinHeight="200"
-                Name="MainFrame"
+            Margin="0"
+            Padding="0"
+            MinHeight="200"
+            Name="MainFrame"
+            NavigationUIVisibility="Hidden"
                 />
         <!--Row3-->
         <!--Row4-->
