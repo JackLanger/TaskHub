@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -83,11 +84,15 @@ namespace TaskHub.ViewModels
         /// 
 
 
+        private ICommand _HomeCommand;
+        private ICommand _DataGridCommand;
+        private ICommand _NewTaskCommand;
+
+        public ICommand NewTaskCommand => _NewTaskCommand ?? (_NewTaskCommand = new RelayCommand(() => CurrentPage = ApplicationPage.NewTask));
+        public ICommand DataGridCommand => _DataGridCommand ?? (_DataGridCommand = new RelayCommand(() => CurrentPage = ApplicationPage.DataGrid));
+        public ICommand HomeCommand => _HomeCommand ?? (_HomeCommand = new RelayCommand(() => CurrentPage = ApplicationPage.Home));
 
 
-        public ICommand HomeCommand { get; set; }
-        public ICommand DataGridCommand { get; set; }
-        public ICommand NewTaskCommand { get; set; }
 
         #endregion
 
@@ -101,10 +106,7 @@ namespace TaskHub.ViewModels
             data = DataAccess.ReadTaskDB().ToList();
             TasksList = new ObservableCollection<TaskModel>();
 
-
-            HomeCommand = new RelayCommand(() => _CurrentPage = ApplicationPage.Home);
-            DataGridCommand = new RelayCommand(() => _CurrentPage = ApplicationPage.DataGrid);
-            NewTaskCommand = new RelayCommand(() => _CurrentPage = ApplicationPage.NewTask);
+            
 
             foreach (var task in DataAccess.ReadTaskDB())
             {
@@ -113,6 +115,8 @@ namespace TaskHub.ViewModels
 
             _User = new UserModel() {UserName = "jack" };
         }
+
+       
 
         #endregion
 
