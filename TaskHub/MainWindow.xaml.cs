@@ -56,9 +56,6 @@ namespace TaskHub
 
         private void NewTaskView_SubmitButtonPressed(object sender, NewEntryEventArgs e) => main.AddNewEntry(e.Name, e.Info, e.Status);
 
-        private void ShowData_Click(object sender, RoutedEventArgs e) => MainFrame.Content = dataGridView ?? new DataGridView();
-        void AddData_Click(object sender, RoutedEventArgs e) => MainFrame.Content = newTaskView ?? new NewTaskView();
-        void CardView_Click(object sender, RoutedEventArgs e) => MainFrame.Content = cardView ?? new CardView();
-        private void Home_Click(object sender, RoutedEventArgs e) => MainFrame.Content = taskCardListControll ?? new TaskCardListControll();
+        
     }
 }

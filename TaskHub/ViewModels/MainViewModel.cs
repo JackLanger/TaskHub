@@ -19,11 +19,6 @@ namespace TaskHub.ViewModels
     public class MainViewModel:ModelBase
     {
 
-        #region events
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion
 
         #region private members
         private ObservableCollection<TaskModel> _TasksList;
@@ -48,9 +43,6 @@ namespace TaskHub.ViewModels
         }
 
 
-
-        
-
         public TaskModel taskModel
         {
             get => _TaskModel;
@@ -67,7 +59,7 @@ namespace TaskHub.ViewModels
             set
             {
                 _ActiveTask = value;
-                NotifyPropertyChanged("_ActiveTask");
+                OnPropertyChanged();
             }
         }
 
@@ -93,55 +85,12 @@ namespace TaskHub.ViewModels
 
 
 
-        private ICommand _NewTaskCommand;
-        private ICommand _HomeCommand;
-        private ICommand _DataGridCommand;
-
-
-        public ICommand Home
-        {
-            get
-            {
-                if (_HomeCommand == null)
-                {
-                    _HomeCommand = new RelayCommand(
-                        () => CurrentPage = ApplicationPage.Home);
-                }
-                return _NewTaskCommand;
-            }
-        }
-
-        public ICommand DataGrid
-        {
-            get
-            {
-                if (_DataGridCommand == null)
-                {
-                    _DataGridCommand = new RelayCommand(
-                        () => CurrentPage = ApplicationPage.DataGrid);
-                }
-                return _NewTaskCommand;
-            }
-        }
-
-
-        public ICommand NewTaskCommand
-        {
-            get
-            {
-                if (_NewTaskCommand == null)
-                {
-                    _NewTaskCommand = new RelayCommand(
-                        () => CurrentPage = ApplicationPage.NewTask);
-                }
-                return _NewTaskCommand;
-            }
-        }
+        public ICommand HomeCommand { get; set; }
+        public ICommand DataGridCommand { get; set; }
+        public ICommand NewTaskCommand { get; set; }
 
         #endregion
 
-        protected void NotifyPropertyChanged([CallerMemberName]String info = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(info));
-        
 
 
         #region constructor
@@ -152,6 +101,10 @@ namespace TaskHub.ViewModels
             data = DataAccess.ReadTaskDB().ToList();
             TasksList = new ObservableCollection<TaskModel>();
 
+
+            HomeCommand = new RelayCommand(() => _CurrentPage = ApplicationPage.Home);
+            DataGridCommand = new RelayCommand(() => _CurrentPage = ApplicationPage.DataGrid);
+            NewTaskCommand = new RelayCommand(() => _CurrentPage = ApplicationPage.NewTask);
 
             foreach (var task in DataAccess.ReadTaskDB())
             {

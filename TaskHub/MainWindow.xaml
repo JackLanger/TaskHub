@@ -63,12 +63,12 @@
 
             </StackPanel.Resources>
 
-            <Button Command="{Binding NewTaskCommand}" >Home</Button>
-            <Button Command="{Binding DataGrid}">Grid view</Button>
+            <Button Command="{Binding HomeCommand}" >Home</Button>
+            <Button Command="{Binding DataGridCommand}">Grid view</Button>
             <Button Command="{Binding NewTaskCommand}">add Task</Button>
-            <Button Click="CardView_Click">Card view</Button>
-            <Button Click="AddData_Click" IsEnabled="False"></Button>
-            <Button Click="AddData_Click" >Profile</Button>
+            <Button >Card view</Button>
+            <Button IsEnabled="False"></Button>
+            <Button >Profile</Button>
             <Button >Exit</Button>
 
         </StackPanel>
