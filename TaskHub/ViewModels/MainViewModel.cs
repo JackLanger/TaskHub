@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.RightsManagement;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -87,10 +89,22 @@ namespace TaskHub.ViewModels
         private ICommand _HomeCommand;
         private ICommand _DataGridCommand;
         private ICommand _NewTaskCommand;
+        private ICommand _SwitchTaskStatusCommand;
+        private ICommand _MarkAsDoneCommand;
+        private ICommand _DeleteCommand;
 
-        public ICommand NewTaskCommand => _NewTaskCommand ?? (_NewTaskCommand = new RelayCommand(() => CurrentPage = ApplicationPage.NewTask));
-        public ICommand DataGridCommand => _DataGridCommand ?? (_DataGridCommand = new RelayCommand(() => CurrentPage = ApplicationPage.DataGrid));
-        public ICommand HomeCommand => _HomeCommand ?? (_HomeCommand = new RelayCommand(() => CurrentPage = ApplicationPage.Home));
+        public ICommand DeleteCommand => _DeleteCommand ??= new RelayCommand(() => TasksList.Clear());
+
+        public ICommand HomeCommand => _HomeCommand ??= new RelayCommand(() => CurrentPage = ApplicationPage.Home);
+        public ICommand DataGridCommand => _DataGridCommand ??= new RelayCommand(() => CurrentPage = ApplicationPage.DataGrid);
+        public ICommand NewTaskCommand => _NewTaskCommand ??= new RelayCommand(() => CurrentPage = ApplicationPage.NewTask);
+
+        public ICommand SwitchTaskStatusCommand => _SwitchTaskStatusCommand ??= new ParameterizedRelayCommand(parameter =>  SwitchTaskStatus(parameter));
+        public ICommand MarkAsDoneCommand => _MarkAsDoneCommand ??= new RelayCommand(() => MarkAsDone());
+        private Action SwitchTaskStatus(Object task)
+        {
+            throw new NotImplementedException();
+        }
 
 
 
@@ -116,31 +130,32 @@ namespace TaskHub.ViewModels
             _User = new UserModel() {UserName = "jack" };
         }
 
-       
+
 
         #endregion
 
+        #region Methods
 
 
         internal void UpdateTaskModel(Object task)
         {
             var t = task as TaskModel;
-            _ActiveTask.TaskName = t.TaskName; 
-            _ActiveTask.TaskDescription = t.TaskDescription; 
-            _ActiveTask.TaskStatus = t.TaskStatus; 
-            _ActiveTask.PostedBy = t.PostedBy; 
+            _ActiveTask.TaskName = t.TaskName;
+            _ActiveTask.TaskDescription = t.TaskDescription;
+            _ActiveTask.TaskStatus = t.TaskStatus;
+            _ActiveTask.PostedBy = t.PostedBy;
         }
 
         //private void TaskModel_PropertyChanged(object sender, PropertyChangedEventArgs e) => DataAccess.UpdateDb(sender as TaskModel);
 
         public void AddNewEntry(string taskName, string taskDescr, string status, bool active = true)
         {
-            var task = new TaskModel(taskName,_User.UserName,taskDescr,status,active);
+            var task = new TaskModel(taskName, _User.UserName, taskDescr, status, active);
             task.NewEntry();
             _TasksList.Add(task);
 
             CollectionViewSource.GetDefaultView(_TasksList).Refresh();
-            
+
         }
 
         public void FilterData(string filter)
@@ -148,12 +163,31 @@ namespace TaskHub.ViewModels
             _TasksList.Clear();
             var filteredData = data.Where(x => x.TaskStatus == filter).Select(t => t).ToList();
 
-            foreach( var task in filteredData)
+            foreach (var task in filteredData)
             {
                 _TasksList.Add(task);
             }
 
         }
 
+        /// <summary>
+        /// TODo: remove from list and trigger delete from SQL DB on DAL
+        /// </summary>
+        private void DeleteTask(TaskModel task)
+        {
+
+            TasksList.Remove(task);
+        }
+
+
+        /// <summary>
+        /// TODO: Check of Task and make inaccessible while marked as done
+        /// </summary>
+        private void MarkAsDone()
+        {
+            throw new NotImplementedException();
+        }
+        
+        #endregion
     }
 }

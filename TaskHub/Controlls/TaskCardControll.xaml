@@ -80,16 +80,23 @@
                                 Padding="5"
                                 BorderBrush="White"
                                 />
-                    <TextBlock 
-                                Grid.Row="5"
-                                Text="{Binding PostedBy}"
-                                Margin="5"
-                                />
-                    <TextBlock 
-                                Grid.Row="4"
+
+                    <StackPanel 
+                        Margin="10 0"
+                        Grid.Row="5"
+                        Orientation="Horizontal">
+                    
+                        <TextBlock 
                                 Margin="5"
                                 Text="{Binding DateAdded, Mode=OneWay}"
                                 />
+                        
+                    <TextBlock 
+                                Text="{Binding PostedBy}"
+                                Margin="5"
+                                FontWeight="Bold"   
+                                />
+                    </StackPanel>
 
 
                     <!--button controll-->
@@ -122,14 +129,18 @@
 
                         </StackPanel.Resources>
 
-                        <Button Content="Delete">
+                        <Button 
+                            Command="{Binding Path=DeleteCommand}"
+                            Content="Delete">
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">
                                     <Setter Property="CornerRadius" Value="10"/>
                                 </Style>
                             </Button.Resources>
                         </Button>
-                        <Button Content="Done">
+                        <Button 
+                            Command="{Binding MarkAsDoneCommand}"
+                            Content="Done">
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">
                                     <Setter Property="CornerRadius" Value="10"/>
@@ -139,19 +150,21 @@
 
                         <Button 
                                     Content="{Binding TaskStatus}"
+                                    Command="{Binding SwitchTaskStatusCommand}"
+                                    CommandParameter="{Binding TaskStatus}"
                                     Width="70"
                                     Height="25"
-                                    Background="#0be881"
-                                    BorderBrush="#0be881"
+                                    Background="{StaticResource MintGreenBrush}"
+                                    BorderBrush="{StaticResource MintGreenBrush}"
                                     Name="BtnStatus" 
                                     FontWeight="SemiBold"
                                     FontSize="13"
                                     VerticalAlignment="Center"
                                         >
-
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">
-                                    <Setter Property="CornerRadius" Value="10"/>
+                                    
+                                    <Setter Property="CornerRadius" Value="15"/>
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True"/>
                                     </Style.Triggers>
