@@ -24,5 +24,10 @@ namespace TaskHub
         {
             InitializeComponent();
         }
+
+        private void BtnStatus_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

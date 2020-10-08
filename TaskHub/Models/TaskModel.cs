@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using TaskHub.Controlls.Commands;
 using TaskHub.DAL;
 using TaskHub.Models;
 using TaskHub.Models.Exeption;
@@ -114,8 +117,6 @@ namespace TaskHub.Model
 
         public void NewEntry() => DataAccess.WriteNewEntry(this);
 
-
-        
 
     }
 }

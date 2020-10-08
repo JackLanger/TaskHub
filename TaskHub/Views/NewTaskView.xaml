@@ -202,7 +202,7 @@
             Grid.Row="6"
             Grid.ColumnSpan="2"
             Name="SubmitButton"
-            Click="SubmitButton_Click" Height="Auto" RenderTransformOrigin="0.495,0.62"
+            Height="Auto" RenderTransformOrigin="0.495,0.62"
             >
             Submit
         </Button>

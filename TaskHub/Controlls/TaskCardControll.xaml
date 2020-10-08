@@ -127,11 +127,16 @@
                                 </Style.Triggers>
                             </Style>
 
+                            
+                            
                         </StackPanel.Resources>
-
+                        
                         <Button 
                             Command="{Binding Path=DeleteCommand}"
-                            Content="Delete">
+                            Content="Delete"
+                            x:Name="DelButton"
+                            >
+                            
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">
                                     <Setter Property="CornerRadius" Value="10"/>
@@ -149,18 +154,18 @@
                         </Button>
 
                         <Button 
-                                    Content="{Binding TaskStatus}"
-                                    Command="{Binding SwitchTaskStatusCommand}"
-                                    CommandParameter="{Binding TaskStatus}"
-                                    Width="70"
-                                    Height="25"
-                                    Background="{StaticResource MintGreenBrush}"
-                                    BorderBrush="{StaticResource MintGreenBrush}"
-                                    Name="BtnStatus" 
-                                    FontWeight="SemiBold"
-                                    FontSize="13"
-                                    VerticalAlignment="Center"
-                                        >
+                            Content="{Binding TaskStatus}"
+                            Command="{Binding SwitchTaskStatusCommand}"
+                            CommandParameter="{Binding TaskStatus}"
+                            Width="70"
+                            Height="25"
+                            Background="{StaticResource MintGreenBrush}"
+                            BorderBrush="{StaticResource MintGreenBrush}"
+                            Name="BtnStatus" 
+                            FontWeight="SemiBold"
+                            FontSize="13"
+                            VerticalAlignment="Center"
+                                >
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">
                                     

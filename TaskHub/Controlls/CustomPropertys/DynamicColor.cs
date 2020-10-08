@@ -17,12 +17,12 @@ namespace TaskHub
         public static readonly DependencyProperty BackGroundColorProperty = DependencyProperty.RegisterAttached("BackgroundColor", typeof(Color), typeof(Button));
 
 
-        private void SetValue(DependencyObject dObj, Brushes value)
+        public  void SetValue(DependencyObject dObj, Brushes value)
         {
             dObj.SetValue(BackGroundColorProperty,value);
         }
 
-        private Brush GetValue(DependencyObject dObj)
+        public Brush GetValue(DependencyObject dObj)
         {
             return (Brush)dObj.GetValue(BackGroundColorProperty);
         }

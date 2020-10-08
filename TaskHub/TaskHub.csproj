@@ -99,6 +99,7 @@
     </ApplicationDefinition>
     <Compile Include="Controlls\Commands\ParameterizedRelayCommand.cs" />
     <Compile Include="Controlls\Commands\RelayCommand.cs" />
+    <Compile Include="Controlls\CustomPropertys\DeleteHelper.cs" />
     <Compile Include="Controlls\CustomPropertys\DynamicColor.cs" />
     <Compile Include="Controlls\TaskCardControll.xaml.cs">
       <DependentUpon>TaskCardControll.xaml</DependentUpon>

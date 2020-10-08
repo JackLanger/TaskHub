@@ -25,37 +25,8 @@ namespace TaskHub.Views
     /// <summary>
     /// Interaction logic for NewTaskView.xaml
     /// </summary>
-    public partial class NewTaskView : Page,INotifyPropertyChanged
+    public partial class NewTaskView : Page
     {
-        public event SubmitButtonHandler SubmitButtonPressed;
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public string TaskName { get; set; }
-        private string _TaskDescription;
-
-        public string TaskDescription
-        {
-            get { return _TaskDescription; }
-            set { _TaskDescription = value;
-                OnPropertyChanged();
-            }
-        }
-        private TextBox _TB;
-
-        public TextBox TB
-        {
-            get { return _TB; }
-            set { _TB = value; OnPropertyChanged(); }
-        }
-
-
-        //List<string> _TaskStatus = new List<string>() { "active", "inactive", "in progress", "finished", "urgent" };
-
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-
 
         public NewTaskView()
         {
@@ -65,30 +36,5 @@ namespace TaskHub.Views
 
         }
 
-
-
-        
-        private void SubmitButton_Click(object sender, RoutedEventArgs e)
-        {
-
-            var name = TbTaskName.Text.Trim();
-            if (name.Length > 0)
-            {
-                TaskName = name;
-                TaskDescription = TbDescription.Text;
-            }
-            else
-            {
-                LblError.Text = "sorry, you have to enter a Valid Name!";
-                return;
-            }
-
-            SubmitButtonPressed?.Invoke(this, new NewEntryEventArgs(TaskName,TaskDescription,CmbStatus.Text));
-
-            TbTaskName.Clear();
-            TbDescription.Clear();
-        }
-
-        
     }
 }

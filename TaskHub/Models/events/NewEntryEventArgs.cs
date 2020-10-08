@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaskHub.Models.events
 {
-    public class NewEntryEventArgs:EventArgs
+    public class NewEntryEventArgs : EventArgs
     {
         private string _Name;
 
