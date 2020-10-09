@@ -87,8 +87,6 @@ namespace TaskHub.Model
 
         public TaskModel(string name, string user, string descr, string status, bool active)
         {
-            
-            
              DateAdded = DateTime.Now;
              _TaskName = name;
              _TaskDescription = descr;
@@ -97,23 +95,10 @@ namespace TaskHub.Model
              _IsActive = active;
         }
 
-        
 
-        protected virtual void OnInvalidInput(InvalidInputEventArgs e)
-        {
+        protected virtual void OnInvalidInput(InvalidInputEventArgs e) => InvalidInput?.Invoke(this, e);
 
-            if (InvalidInput != null)
-            {
-                InvalidInput(this, e);
-            }
-            else throw e.Error;
-
-        }
-
-        public void UpdateStatusInDb()
-        {
-            DataAccess.UpdateDb(this);
-        }
+        public void UpdateStatusInDb() => DataAccess.UpdateDb(this);
 
         public void NewEntry() => DataAccess.WriteNewEntry(this);
 

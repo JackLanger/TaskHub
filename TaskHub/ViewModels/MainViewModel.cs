@@ -120,7 +120,6 @@ namespace TaskHub.ViewModels
             data = DataAccess.ReadTaskDB().ToList();
             TasksList = new ObservableCollection<TaskModel>();
 
-            
 
             foreach (var task in DataAccess.ReadTaskDB())
             {

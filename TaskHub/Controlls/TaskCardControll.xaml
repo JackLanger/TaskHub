@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:TaskHub"
              xmlns:ViewModels="clr-namespace:TaskHub.ViewModels" 
              x:Class="TaskHub.TaskCardControll"
-             mc:Ignorable="d" Height="300" Width="225"
+             mc:Ignorable="d" MinHeight="100" Width="225"
              d:DesignHeight="300" d:DesignWidth="200">
     
 
@@ -19,6 +19,7 @@
                 BorderBrush="{StaticResource LondonSquareBrush}"
                 BorderThickness="1"
                 Margin="10"
+                DataContext="{Binding}"
                 >
                 <Border.BitmapEffect>
                     <DropShadowBitmapEffect
@@ -27,7 +28,6 @@
                                 Opacity="0.3" 
                                 Softness="0.2"
                                 ShadowDepth="7"
-                                
                                 />
                 </Border.BitmapEffect>
 
@@ -57,28 +57,31 @@
                             CornerRadius="15"
                             >
                             <TextBox
+                                Text="{Binding TaskName}"
                                 Background="{StaticResource MintGreenBrush}"
+                                FontFamily="{StaticResource InterBold}"
+                                FontSize="{StaticResource FontSizeRegular}"
                                 BorderThickness="0"
                                 Width="160"
                                 TextWrapping="Wrap"
-                                FontSize="12"
-                                FontWeight="SemiBold"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
                                 TextAlignment="Center"
-                                Text="{Binding TaskName}"
                                 >
                             </TextBox>
                         </Border>
                     </Border>
 
                     <TextBox 
-                                Grid.Row="3"
-                                Text="{Binding TaskDescription}"
-                                TextWrapping="Wrap"
-                                Margin="5"
-                                Padding="5"
-                                BorderBrush="White"
+                        Grid.Row="3"
+                        Text="{Binding TaskDescription}"
+                        FontFamily="{StaticResource InterBlack}"
+                        FontSize="{StaticResource FontSizeSmall}"
+                        TextWrapping="Wrap"
+                        AcceptsReturn="True"
+                        Margin="5"
+                        Padding="5"
+                        BorderBrush="White"
                                 />
 
                     <StackPanel 
@@ -117,12 +120,29 @@
                                 <Setter Property="VerticalAlignment"    Value="Center"/>
                                 <Setter Property="Background" Value="White" />
                                 <Setter Property="Height" Value="23" />
-                                <Setter Property="BorderBrush" Value="#485460"/>
                                 <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="BorderBrush" Value="{StaticResource LondonSquareBrush}"/>
+                                <Setter Property="FontFamily" Value="{StaticResource InterLight}" />
+                                <Setter Property="FontSize" Value="{StaticResource FontSizeSmall}"/>
+                                <Setter Property="Foreground" Value="{StaticResource HintOfElusiveBlueBrush}"/>
+
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter 
+                                        HorizontalAlignment="Center" 
+                                        VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
 
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#0fbcf9"/>
+                                        <Setter Property="BorderBrush" Value="{StaticResource LondonSquareBrush}" />
+                                        <Setter Property="Background" Value="{StaticResource HintOfElusiveBlueBrush}"/>
+                                        <Setter Property="Foreground" Value="{StaticResource BlacPearlBrush}" />
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -145,7 +165,9 @@
                         </Button>
                         <Button 
                             Command="{Binding MarkAsDoneCommand}"
-                            Content="Done">
+                            Uid="BtnDone"
+                            Content="Done"
+                            >
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">
                                     <Setter Property="CornerRadius" Value="10"/>
@@ -155,24 +177,19 @@
 
                         <Button 
                             Content="{Binding TaskStatus}"
-                            Command="{Binding SwitchTaskStatusCommand}"
-                            CommandParameter="{Binding TaskStatus}"
                             Width="70"
                             Height="25"
+                            Name="BtnStatus" 
+                            Foreground="{StaticResource BlacPearlBrush}"
                             Background="{StaticResource MintGreenBrush}"
                             BorderBrush="{StaticResource MintGreenBrush}"
-                            Name="BtnStatus" 
-                            FontWeight="SemiBold"
-                            FontSize="13"
+                            FontFamily="{StaticResource InterBold}"
+                            FontSize="{StaticResource FontSizeRegular}"
                             VerticalAlignment="Center"
                                 >
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">
-                                    
                                     <Setter Property="CornerRadius" Value="15"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True"/>
-                                    </Style.Triggers>
                                 </Style>
                             </Button.Resources>
                         </Button>

@@ -1,28 +1,48 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.Linq.Mapping;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
 using TaskHub.Model;
-
 
 
 namespace TaskHub
 {
+
+
     public class DeleteHelper:DependencyObject
     {
-        public static readonly DependencyProperty CanDeleteThisProperty = DependencyProperty.RegisterAttached("CanDelete", typeof(bool), typeof(TaskModel));
 
-        public static void SetCanDelete(DependencyObject target, Boolean value)
+        public static readonly DependencyProperty CanDeleteProperty = 
+            DependencyProperty.RegisterAttached(
+                "CanDelete", 
+                typeof(bool),
+                typeof(DeleteHelper),
+                new PropertyMetadata (false, OnCanDeleteChanged)
+                );
+
+        private static void OnCanDeleteChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            target.SetValue(CanDeleteThisProperty, value);
+            var delete = d as Button;
+
+            if (delete == null)
+                return;
+
+            delete.Click -= Delete_Click;
+
+            if ( (bool)e.NewValue)
+                delete.Click += Delete_Click;
         }
 
-        public static bool GetCanDelete(DependencyObject target)
+        private static void Delete_Click(object sender, RoutedEventArgs e)
         {
-            return (bool)target.GetValue(CanDeleteThisProperty);
+            
         }
+
+        public static void SetCanDelete(DependencyObject target, Boolean value) => target.SetValue(CanDeleteProperty, value);
+
+        public static bool GetCanDelete(DependencyObject target) => (bool)target.GetValue(CanDeleteProperty);
 
     }
 }

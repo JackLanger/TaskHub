@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:TaskHub.Recources" 
+                    xmlns:local="clr-namespace:TaskHub.Resources" 
                     xmlns:Color="clr-namespace:System;assembly=mscorlib">
 
     <Color x:Key="BlackPearl">#1e272e</Color>
@@ -29,6 +29,9 @@
 
     <Color x:Key="ChromeYellow">#ffa801</Color>
     <SolidColorBrush x:Key="ChromeYellowBrush" Color="{StaticResource ChromeYellow}" />
+    
+    <Color x:Key="RedOrange">#ff3f34</Color>
+    <SolidColorBrush x:Key="RedOrangeBrush" Color="{StaticResource RedOrange}" />
     
 
 

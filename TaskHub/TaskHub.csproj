@@ -100,7 +100,6 @@
     <Compile Include="Controlls\Commands\ParameterizedRelayCommand.cs" />
     <Compile Include="Controlls\Commands\RelayCommand.cs" />
     <Compile Include="Controlls\CustomPropertys\DeleteHelper.cs" />
-    <Compile Include="Controlls\CustomPropertys\DynamicColor.cs" />
     <Compile Include="Controlls\TaskCardControll.xaml.cs">
       <DependentUpon>TaskCardControll.xaml</DependentUpon>
     </Compile>
@@ -157,7 +156,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Recources\Colors.xaml">
+    <Page Include="Resources\Colors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Fonts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -9,10 +9,20 @@
       Title="NewTaskView"
       >
 
-    
 
 
-    <Grid>
+    <Border>
+
+        <Border.BitmapEffect>
+            <DropShadowBitmapEffect
+                                Color="{StaticResource HintOfElusiveBlue}" 
+                                Direction="-50" 
+                                Opacity="0.3" 
+                                Softness="0.2"
+                                ShadowDepth="7"
+                                />
+        </Border.BitmapEffect>
+        <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="*"/>
@@ -27,19 +37,21 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <!--Row1-->
+
+        
+            <!--Row1-->
 
 
         <Grid.Resources>
             <Style TargetType="{x:Type Button}">
-                <Setter Property="Background" Value="#1e272e"/>
-                <Setter Property="Foreground" Value="#4bcffa"/>
-                <Setter Property="BorderBrush" Value="#1e272e"/>
+                <Setter Property="Background" Value="{StaticResource BlacPearlBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource FreshTurqoiseBrush}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource BlacPearlBrush}"/>
                 <Setter Property="Height" Value="35"/>
                 <Setter Property="Margin" Value="0"/>
                 <Setter Property="Cursor" Value="Hand"/>
-                <Setter Property="FontSize" Value="15"/>
-                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}"/>
+                <Setter Property="FontFamily" Value="{StaticResource InterBold}" />
 
                 <Setter Property="Template">
                     <Setter.Value>
@@ -52,16 +64,17 @@
                 </Setter>
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Background" Value="#485460"/>
+                        <Setter Property="Background" Value="{StaticResource ChromeYellowBrush}"/>
+                        <Setter Property="Foreground" Value="{StaticResource BlacPearlBrush}" />
                     </Trigger>
                 </Style.Triggers>
-
-
+                
             </Style>
 
-
             <Style TargetType="{x:Type Label}">
-                <Setter Property="Foreground" Value="#1e272e"/>
+                <Setter Property="Foreground" Value="{StaticResource BlacPearlBrush}"/>
+                <Setter Property="Background" Value="{StaticResource LondonSquareBrush}" />
+                <Setter Property="FontFamily" Value="{StaticResource InterBlack}" />
                 <Setter Property="Margin" Value="0"/>
                 <Setter Property="Padding" Value="0"/>
                 <Setter Property="VerticalContentAlignment" Value="Bottom"/>
@@ -69,29 +82,33 @@
             </Style>
 
             <Style TargetType="{x:Type TextBox}">
-                <Setter Property="Foreground" Value="#1e272e"/>
+                <Setter Property="Foreground" Value="{StaticResource BlacPearlBrush}"/>
+                <Setter Property="FontFamily" Value="{StaticResource InterBold}"/>
                 <Setter Property="TextWrapping" Value="Wrap"/>
 
             </Style>
 
 
             <Style TargetType="{x:Type TextBlock}">
-                <Setter Property="Foreground" Value="#1e272e"/>
-
+                <Setter Property="Foreground" Value="{StaticResource BlacPearlBrush}"/>
+                <Setter Property="FontFamily" Value="{StaticResource InterThinItalic}"/>
             </Style>
 
         </Grid.Resources>
 
-        <Label 
+
+        
+
+            <Label 
             Grid.Row="0" 
             Grid.Column="1" 
             Grid.ColumnSpan="3"
-            FontSize="40"
+            FontSize="{StaticResource FontSizeXXXLarge}"
             HorizontalContentAlignment="Left"
             Margin="200 0 0 0"
-            >
-            Add new Task
-        </Label>
+            Content=" Add New Task"
+            />
+
 
         <!--Row2-->
 
@@ -100,9 +117,14 @@
             Grid.Row="1" 
             Grid.Column="1"
             >
+            <StackPanel.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="25" />
+                </Style>
+            </StackPanel.Resources>
             <TextBlock 
             Name="LblError"
-            Foreground="Red"
+            Foreground="{StaticResource RedOrangeBrush}"
             VerticalAlignment="Bottom"
             Margin="5"></TextBlock>
             <WrapPanel>
@@ -154,27 +176,28 @@
 
             <StackPanel>
                 <StackPanel >
-                    <Label 
+                        <Label 
                             MinWidth="150"
                             MaxHeight="40"
                             Margin="5"
                         >
-                        Task Description:
-                    </Label>
+                            Task Description:
+                        </Label>
 
-                    <TextBox Name="TbDescription"
+                        <TextBox Name="TbDescription"
                       Width="450"
                       Height="200"
                       Margin="5" 
                       AcceptsReturn="True" 
                       >
-                        <TextBox.Text>
-                            <Binding  
+                            <TextBox.Text>
+                                <Binding  
                         Path="TaskDescription"
                         UpdateSourceTrigger="PropertyChanged"/>
-                        </TextBox.Text>
-                    </TextBox>
-                </StackPanel>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                
                 <WrapPanel             
                      MaxHeight="40"
                      Margin="5 0 40 0"
@@ -207,4 +230,5 @@
             Submit
         </Button>
     </Grid>
+        </Border>
 </Page>
