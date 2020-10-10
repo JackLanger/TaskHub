@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using TaskHub.Controlls.Commands;
 using TaskHub.DAL;
@@ -15,12 +16,20 @@ using TaskHub.Models.Exeption;
 namespace TaskHub.Model
 {
     public delegate void InvalidInputHandler(ModelBase model, EventArgs invalidInput);
+    public delegate void DeleteTHisHandler(TaskModel model, EventArgs deleteThisArgs);
 
     public class TaskModel:ModelBase
     {
         public event InvalidInputHandler InvalidInput;
+        public event DeleteTHisHandler DeleteThis; 
 
-        
+        private ICommand _DeleteCommand;
+        public ICommand DeleteCommand => _DeleteCommand ??= new RelayCommand(() => OnDeleteThis());
+
+        private void DoSomething()
+        {
+            _CanDelete = true;
+        }
 
         public int TaskId { get; set; }
         private string _TaskName;
@@ -29,6 +38,18 @@ namespace TaskHub.Model
         public DateTime DateAdded { get; }
         private bool _IsActive;
         private string _TaskStatus;
+        private bool _CanDelete;
+
+        public bool CanDelete
+        {
+            get => _CanDelete;
+            private set
+            {
+                _CanDelete = value;
+                OnPropertyChanged();
+            }
+        }
+
 
 
 
@@ -93,15 +114,22 @@ namespace TaskHub.Model
              _PostedBy = user;
              _TaskStatus = status;
              _IsActive = active;
+            _CanDelete = false;
+            
         }
 
 
         protected virtual void OnInvalidInput(InvalidInputEventArgs e) => InvalidInput?.Invoke(this, e);
 
+        protected virtual void OnDeleteThis ()
+        {
+            DeleteThis?.Invoke(this, new EventArgs());
+        }
+
         public void UpdateStatusInDb() => DataAccess.UpdateDb(this);
 
         public void NewEntry() => DataAccess.WriteNewEntry(this);
 
-
+        public void DeleteEntry() => DataAccess.RemoveEntry(this);
     }
 }

@@ -44,14 +44,14 @@
 
         <Grid.Resources>
             <Style TargetType="{x:Type Button}">
+                <Setter Property="FontFamily" Value="{StaticResource InterBold}" />
+                <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}"/>
                 <Setter Property="Background" Value="{StaticResource BlacPearlBrush}"/>
                 <Setter Property="Foreground" Value="{StaticResource FreshTurqoiseBrush}"/>
                 <Setter Property="BorderBrush" Value="{StaticResource BlacPearlBrush}"/>
                 <Setter Property="Height" Value="35"/>
                 <Setter Property="Margin" Value="0"/>
                 <Setter Property="Cursor" Value="Hand"/>
-                <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}"/>
-                <Setter Property="FontFamily" Value="{StaticResource InterBold}" />
 
                 <Setter Property="Template">
                     <Setter.Value>
@@ -72,13 +72,14 @@
             </Style>
 
             <Style TargetType="{x:Type Label}">
-                <Setter Property="Foreground" Value="{StaticResource BlacPearlBrush}"/>
-                <Setter Property="Background" Value="{StaticResource LondonSquareBrush}" />
-                <Setter Property="FontFamily" Value="{StaticResource InterBlack}" />
-                <Setter Property="Margin" Value="0"/>
-                <Setter Property="Padding" Value="0"/>
-                <Setter Property="VerticalContentAlignment" Value="Bottom"/>
-                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                    <Setter Property="Foreground" Value="{StaticResource BlacPearlBrush}"/>
+                    <Setter Property="Background" Value="{StaticResource LondonSquareBrush}" />
+                    <Setter Property="FontFamily" Value="{StaticResource InterBlack}"/>
+                    <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
+                    <Setter Property="Margin" Value="5"/>
+                    <Setter Property="Padding" Value="5"/>
+                    <Setter Property="VerticalContentAlignment" Value="Bottom"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
             </Style>
 
             <Style TargetType="{x:Type TextBox}">
@@ -89,24 +90,25 @@
             </Style>
 
 
-            <Style TargetType="{x:Type TextBlock}">
-                <Setter Property="Foreground" Value="{StaticResource BlacPearlBrush}"/>
-                <Setter Property="FontFamily" Value="{StaticResource InterThinItalic}"/>
-            </Style>
-
-        </Grid.Resources>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Foreground" Value="{StaticResource BlacPearlBrush}"/>
+                    <Setter Property="FontFamily" Value="{StaticResource InterThinItalic}"/>
+                </Style>
+            </Grid.Resources>
 
 
         
 
             <Label 
-            Grid.Row="0" 
-            Grid.Column="1" 
-            Grid.ColumnSpan="3"
-            FontSize="{StaticResource FontSizeXXXLarge}"
-            HorizontalContentAlignment="Left"
-            Margin="200 0 0 0"
-            Content=" Add New Task"
+                Grid.Row="0" 
+                Grid.Column="1" 
+                Grid.ColumnSpan="3"
+                HorizontalContentAlignment="Left"
+                Margin="200 0 0 0"
+                Padding="0"
+                FontSize="{StaticResource FontSizeXXXLarge}"
+                FontWeight="Bold"
+                Content=" Add New Task"
             />
 
 

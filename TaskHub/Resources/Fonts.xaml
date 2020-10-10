@@ -1,35 +1,19 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:TaskHub.Resources" xmlns:system="clr-namespace:System;assembly=mscorlib">
+                    xmlns:local="clr-namespace:TaskHub.Resources" 
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
 
 
     <!--#region fontpacks -->
-    <FontFamily x:Key="InterBlack">pack://application;,,,/Fonts/#Inter Black</FontFamily>
+
+    <!--pack://application:,,,/Subfolder/ResourceFile.xaml-->
+    <FontFamily x:Key="InterBlack">pack://application;,,,/Fonts/#Inter-Black.otf</FontFamily>
     <FontFamily x:Key="InterBold">pack://application;,,,/Fonts/#Inter Bold</FontFamily>
     <FontFamily x:Key="InterExtraBold">pack://application;,,,/Fonts/#Inter ExtraBold</FontFamily>
-    <FontFamily x:Key="InterLight">pack://application;,,,/Fonts/#Inter Light</FontFamily>
+    <FontFamily x:Key="InterLight">pack://application;,,,/Fonts/#Inter-Light.otf</FontFamily>
     <FontFamily x:Key="InterThin">pack://application;,,,/Fonts/#Inter Thin</FontFamily>
     <FontFamily x:Key="InterThinItalic">pack://application;,,,/Fonts/#Inter ThinItalic</FontFamily>
     <!--#endregion-->
-
-    <!--#region setters -->
-    <Style TargetType="{x:Type Control}" x:Key="BaseStyle">
-        <Setter Property="FontFamily" Value="{StaticResource InterLight}" />
-        <Setter Property="FontSize" Value="{StaticResource FontSizeRegular}" />
-    </Style>
-    <Style TargetType="{x:Type TextBlock}" x:Key="BaseTextBlockStyle">
-        <Setter Property="FontFamily" Value="{StaticResource InterLight}" />
-        <Setter Property="FontSize" Value="{StaticResource FontSizeRegular}" />
-    </Style>
-    <!--#endregion-->
-
-
-    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource BaseStyle}" />
-    <Style TargetType="{x:Type Label}" BasedOn="{StaticResource BaseStyle}" />
-    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource BaseStyle}" />
-    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseTextBlockStyle}" />
-    <Style TargetType="{x:Type ListView}" BasedOn="{StaticResource BaseStyle}" />
-
     <system:Double x:Key="FontSizeSmaller">10</system:Double>
     <system:Double x:Key="FontSizeSmall">12</system:Double>
     <system:Double x:Key="FontSizeRegular">14</system:Double>
@@ -37,5 +21,24 @@
     <system:Double x:Key="FontSizeXLarge">24</system:Double>
     <system:Double x:Key="FontSizeXXLarge">30</system:Double>
     <system:Double x:Key="FontSizeXXXLarge">50</system:Double>
+
+    <!--#region setters -->
+
+    <Style TargetType="{x:Type Control}" x:Key="BaseStyle">
+        <Setter Property="FontFamily" Value="{StaticResource InterBold}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
+        <Setter Property="Foreground" Value="{StaticResource BlacPearlBrush}"/>
+    </Style>
+    <Style TargetType="{x:Type TextBlock}" x:Key="BaseTextBlockStyle">
+        <Setter Property="FontFamily" Value="{StaticResource InterLight}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeSmall}" />
+    </Style>
+    <!--#endregion-->
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource BaseStyle}" />
+    <Style TargetType="{x:Type Label}" BasedOn="{StaticResource BaseStyle}" />
+    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource BaseStyle}" />
+    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseTextBlockStyle}" />
+    <Style TargetType="{x:Type ListView}" BasedOn="{StaticResource BaseStyle}" />
+
 
 </ResourceDictionary>

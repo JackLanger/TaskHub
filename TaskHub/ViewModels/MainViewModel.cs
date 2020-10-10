@@ -91,10 +91,7 @@ namespace TaskHub.ViewModels
         private ICommand _NewTaskCommand;
         private ICommand _SwitchTaskStatusCommand;
         private ICommand _MarkAsDoneCommand;
-        private ICommand _DeleteCommand;
-
-        public ICommand DeleteCommand => _DeleteCommand ??= new RelayCommand(() => TasksList.Clear());
-
+        
         public ICommand HomeCommand => _HomeCommand ??= new RelayCommand(() => CurrentPage = ApplicationPage.Home);
         public ICommand DataGridCommand => _DataGridCommand ??= new RelayCommand(() => CurrentPage = ApplicationPage.DataGrid);
         public ICommand NewTaskCommand => _NewTaskCommand ??= new RelayCommand(() => CurrentPage = ApplicationPage.NewTask);
@@ -124,9 +121,15 @@ namespace TaskHub.ViewModels
             foreach (var task in DataAccess.ReadTaskDB())
             {
                 TasksList.Add(task);
+                task.DeleteThis += Task_DeleteThis;
             }
 
             _User = new UserModel() {UserName = "jack" };
+        }
+
+        private void Task_DeleteThis(TaskModel model, EventArgs deleteThisArgs)
+        {
+            TasksList.Remove(model);
         }
 
 

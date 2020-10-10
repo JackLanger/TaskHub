@@ -47,7 +47,11 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
+                        <!--create the data temp here-->
+
                         <local:TaskCardControll/>
+
+
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

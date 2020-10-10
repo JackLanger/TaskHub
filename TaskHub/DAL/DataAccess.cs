@@ -53,5 +53,10 @@ namespace TaskHub.DAL
             }
         }
 
+        public static void RemoveEntry(TaskModel model)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

@@ -7,6 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHub", "TaskHub\TaskHub.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fonts", "Fonts", "{15EF47A2-C555-4958-871B-9CE300694351}"
 	ProjectSection(SolutionItems) = preProject
+		..\..\..\Desktop\fonts\Antonio-Bold.ttf = ..\..\..\Desktop\fonts\Antonio-Bold.ttf
+		..\..\..\Desktop\fonts\Antonio-Light.ttf = ..\..\..\Desktop\fonts\Antonio-Light.ttf
+		..\..\..\Desktop\fonts\Antonio-Regular.ttf = ..\..\..\Desktop\fonts\Antonio-Regular.ttf
 		..\..\..\AppData\Local\Temp\Rar$DRa16060.47552\inter\Inter\Inter-Black.otf = ..\..\..\AppData\Local\Temp\Rar$DRa16060.47552\inter\Inter\Inter-Black.otf
 		..\..\..\AppData\Local\Temp\Rar$DRa16060.47552\inter\Inter\Inter-BlackItalic.otf = ..\..\..\AppData\Local\Temp\Rar$DRa16060.47552\inter\Inter\Inter-BlackItalic.otf
 		..\..\..\AppData\Local\Temp\Rar$DRa16060.47552\inter\Inter\Inter-Bold.otf = ..\..\..\AppData\Local\Temp\Rar$DRa16060.47552\inter\Inter\Inter-Bold.otf

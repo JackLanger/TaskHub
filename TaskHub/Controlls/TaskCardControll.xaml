@@ -33,10 +33,10 @@
 
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="5"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
@@ -47,22 +47,21 @@
 
                     <Border
                         Grid.Row="1"
-                        Width="190"
                         Height="auto"
-                        MinHeight="33"
-                        
+                        MinHeight="40"
                         >
                         <Border
                             Background="{StaticResource MintGreenBrush}"
-                            CornerRadius="15"
+                            CornerRadius="9 9 0 0"
                             >
                             <TextBox
                                 Text="{Binding TaskName}"
                                 Background="{StaticResource MintGreenBrush}"
                                 FontFamily="{StaticResource InterBold}"
                                 FontSize="{StaticResource FontSizeRegular}"
+                                FontWeight="Bold"
                                 BorderThickness="0"
-                                Width="160"
+                                
                                 TextWrapping="Wrap"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
@@ -84,7 +83,7 @@
                         BorderBrush="White"
                                 />
 
-                    <StackPanel 
+                    <WrapPanel 
                         Margin="10 0"
                         Grid.Row="5"
                         Orientation="Horizontal">
@@ -92,14 +91,33 @@
                         <TextBlock 
                                 Margin="5"
                                 Text="{Binding DateAdded, Mode=OneWay}"
+                            VerticalAlignment="Center"
                                 />
                         
-                    <TextBlock 
+                        <Border
+                            CornerRadius="3"
+                            Background="{StaticResource FreshSpeachBlueBrush}"
+                            Margin="5"
+                            VerticalAlignment="Center"
+                            >
+                            <Border.BitmapEffect>
+                                <DropShadowBitmapEffect
+                                    Color="#808e9b" 
+                                    Direction="-50" 
+                                    Opacity="0.3" 
+                                    Softness="0.2"
+                                    ShadowDepth="3"
+                                    />
+                            </Border.BitmapEffect>
+                            <TextBlock 
                                 Text="{Binding PostedBy}"
                                 Margin="5"
-                                FontWeight="Bold"   
+                                FontWeight="Bold" 
+                                Padding="3"
+                        Foreground="{StaticResource HintOfElusiveBlueBrush}"
                                 />
-                    </StackPanel>
+                        </Border>
+                    </WrapPanel>
 
 
                     <!--button controll-->
