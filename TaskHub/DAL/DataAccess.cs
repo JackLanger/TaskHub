@@ -6,16 +6,17 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using TaskHub.Model;
+using TaskHub.ViewModels;
 
 namespace TaskHub.DAL
 {
     public static class DataAccess
     {
-        public static IList <TaskModel> ReadTaskDB()
+        public static IList<TaskModel> ReadTaskDB()
         {
 
             IList<TaskModel> tasks = new List<TaskModel>();
-            using ( var con = new SqlConnection(@"Data Source=desktop-ihdvud3\sqlexpress;Initial Catalog=TaskTracker;Integrated Security=True"))
+            using (var con = new SqlConnection(@"Data Source=desktop-ihdvud3\sqlexpress;Initial Catalog=TaskTracker;Integrated Security=True"))
             {
                 tasks = con.Query<TaskModel>("dbo.SELECT_Tasks", new TaskModel()).ToList();
             }
@@ -24,8 +25,6 @@ namespace TaskHub.DAL
 
         public static void UpdateDb( TaskModel model)
         {
-            //TaskDataDataContext tdc = new TaskDataDataContext(Properties.Settings.Default.TaskTrackerConnectionString);
-            //tdc.SubmitChanges();
 
             using (var con = new SqlConnection(@"Data Source=desktop-ihdvud3\sqlexpress;Initial Catalog=TaskTracker;Integrated Security=True"))
             {
@@ -37,8 +36,6 @@ namespace TaskHub.DAL
         }
         public static void WriteNewEntry( TaskModel model)
         {
-            //TaskDataDataContext tdc = new TaskDataDataContext(Properties.Settings.Default.TaskTrackerConnectionString);
-            //tdc.SubmitChanges();
 
             using (var con = new SqlConnection(@"Data Source=desktop-ihdvud3\sqlexpress;Initial Catalog=TaskTracker;Integrated Security=True"))
             {
@@ -55,7 +52,8 @@ namespace TaskHub.DAL
 
         public static void RemoveEntry(TaskModel model)
         {
-            throw new NotImplementedException();
+            using (var con = new SqlConnection(@"Data Source=desktop-ihdvud3\sqlexpress;Initial Catalog=TaskTracker;Integrated Security=True"))
+                con.Execute(@"dbo.DELETE_Task @TaskID", model);
         }
 
     }

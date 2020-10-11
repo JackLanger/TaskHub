@@ -24,7 +24,7 @@ namespace TaskHub.ViewModels
 
 
         #region private members
-        private ObservableCollection<TaskModel> _TasksList;
+        private ObservableCollection<TaskViewModel> _TasksList;
         private UserModel _User;
         private List<TaskModel> data = new List<TaskModel>();
         private TaskModel _ActiveTask;
@@ -66,7 +66,7 @@ namespace TaskHub.ViewModels
             }
         }
 
-        public ObservableCollection<TaskModel> TasksList
+        public ObservableCollection<TaskViewModel> TasksList
         {
             get => _TasksList;
             private set
@@ -85,24 +85,13 @@ namespace TaskHub.ViewModels
         /// </summary>
         /// 
 
-
         private ICommand _HomeCommand;
         private ICommand _DataGridCommand;
         private ICommand _NewTaskCommand;
-        private ICommand _SwitchTaskStatusCommand;
-        private ICommand _MarkAsDoneCommand;
         
         public ICommand HomeCommand => _HomeCommand ??= new RelayCommand(() => CurrentPage = ApplicationPage.Home);
         public ICommand DataGridCommand => _DataGridCommand ??= new RelayCommand(() => CurrentPage = ApplicationPage.DataGrid);
         public ICommand NewTaskCommand => _NewTaskCommand ??= new RelayCommand(() => CurrentPage = ApplicationPage.NewTask);
-
-        public ICommand SwitchTaskStatusCommand => _SwitchTaskStatusCommand ??= new ParameterizedRelayCommand(parameter =>  SwitchTaskStatus(parameter));
-        public ICommand MarkAsDoneCommand => _MarkAsDoneCommand ??= new RelayCommand(() => MarkAsDone());
-        private Action SwitchTaskStatus(Object task)
-        {
-            throw new NotImplementedException();
-        }
-
 
 
         #endregion
@@ -115,12 +104,12 @@ namespace TaskHub.ViewModels
         public MainViewModel()
         {
             data = DataAccess.ReadTaskDB().ToList();
-            TasksList = new ObservableCollection<TaskModel>();
+            TasksList = new ObservableCollection<TaskViewModel>();
 
 
             foreach (var task in DataAccess.ReadTaskDB())
             {
-                TasksList.Add(task);
+                TasksList.Add(new TaskViewModel(task));
                 task.DeleteThis += Task_DeleteThis;
             }
 
@@ -129,10 +118,12 @@ namespace TaskHub.ViewModels
 
         private void Task_DeleteThis(TaskModel model, EventArgs deleteThisArgs)
         {
-            TasksList.Remove(model);
+            for (int i = 0; i < TasksList.Count; i++)
+            {
+                if ( TasksList[i].Model == model)
+                TasksList.RemoveAt(i); 
+            }
         }
-
-
 
         #endregion
 
@@ -148,13 +139,12 @@ namespace TaskHub.ViewModels
             _ActiveTask.PostedBy = t.PostedBy;
         }
 
-        //private void TaskModel_PropertyChanged(object sender, PropertyChangedEventArgs e) => DataAccess.UpdateDb(sender as TaskModel);
 
         public void AddNewEntry(string taskName, string taskDescr, string status, bool active = true)
         {
             var task = new TaskModel(taskName, _User.UserName, taskDescr, status, active);
             task.NewEntry();
-            _TasksList.Add(task);
+            _TasksList.Add(new TaskViewModel(task));
 
             CollectionViewSource.GetDefaultView(_TasksList).Refresh();
 
@@ -167,7 +157,7 @@ namespace TaskHub.ViewModels
 
             foreach (var task in filteredData)
             {
-                _TasksList.Add(task);
+                _TasksList.Add(new TaskViewModel(task));
             }
 
         }
@@ -175,19 +165,13 @@ namespace TaskHub.ViewModels
         /// <summary>
         /// TODo: remove from list and trigger delete from SQL DB on DAL
         /// </summary>
-        private void DeleteTask(TaskModel task)
-        {
-
-            TasksList.Remove(task);
-        }
-
 
         /// <summary>
         /// TODO: Check of Task and make inaccessible while marked as done
         /// </summary>
         private void MarkAsDone()
         {
-            throw new NotImplementedException();
+            
         }
         
         #endregion

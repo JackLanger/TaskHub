@@ -12,14 +12,15 @@
 
     <UserControl.Template>
         <ControlTemplate>
-            
+
+
             <Border 
                 CornerRadius="10"
                 Background="White"
                 BorderBrush="{StaticResource LondonSquareBrush}"
                 BorderThickness="1"
                 Margin="10"
-                DataContext="{Binding}"
+                Opacity="{Binding IsActive, Converter={local:OpacityConverter}}"
                 >
                 <Border.BitmapEffect>
                     <DropShadowBitmapEffect
@@ -182,9 +183,10 @@
                             </Button.Resources>
                         </Button>
                         <Button 
-                            Command="{Binding MarkAsDoneCommand}"
+                            Command="{Binding Path=MarkAsDoneCommand}"
                             Uid="BtnDone"
                             Content="Done"
+                            
                             >
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">
@@ -199,7 +201,7 @@
                             Height="25"
                             Name="BtnStatus" 
                             Foreground="{StaticResource BlacPearlBrush}"
-                            Background="{StaticResource MintGreenBrush}"
+                            Background="{Binding TaskStatus, Converter={local:ColorConverter}}"
                             BorderBrush="{StaticResource MintGreenBrush}"
                             FontFamily="{StaticResource InterBold}"
                             FontSize="{StaticResource FontSizeRegular}"
