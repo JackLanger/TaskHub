@@ -35,19 +35,15 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="5"/>
                     </Grid.RowDefinitions>
 
 
-
                     <Border
-                        Grid.Row="1"
+                        Grid.Row="0"
                         Height="auto"
                         MinHeight="40"
                         >
@@ -62,31 +58,36 @@
                                 FontSize="{StaticResource FontSizeRegular}"
                                 FontWeight="Bold"
                                 BorderThickness="0"
-                                
                                 TextWrapping="Wrap"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
                                 TextAlignment="Center"
+                                GotFocus="TextBox_GotFocus"
+                                LostFocus="TextBox_LostFocus"
+                                Name="TbTaskName"
                                 >
                             </TextBox>
                         </Border>
                     </Border>
 
                     <TextBox 
-                        Grid.Row="3"
+                        Grid.Row="1"
                         Text="{Binding TaskDescription}"
                         FontFamily="{StaticResource InterBlack}"
                         FontSize="{StaticResource FontSizeSmall}"
+                        VerticalAlignment="Top"
                         TextWrapping="Wrap"
                         AcceptsReturn="True"
                         Margin="5"
                         Padding="5"
                         BorderBrush="White"
+                        GotFocus="TextBox_GotFocus_1"
+                        LostFocus="TextBox_LostFocus_1"
                                 />
 
                     <WrapPanel 
                         Margin="10 0"
-                        Grid.Row="5"
+                        Grid.Row="2"
                         Orientation="Horizontal">
                     
                         <TextBlock 
@@ -96,7 +97,7 @@
                                 />
                         
                         <Border
-                            CornerRadius="3"
+                            CornerRadius="2"
                             Background="{StaticResource FreshSpeachBlueBrush}"
                             Margin="5"
                             VerticalAlignment="Center"
@@ -124,7 +125,7 @@
                     <!--button controll-->
 
                     <StackPanel
-                                Grid.Row="6"
+                                Grid.Row="3"
                                 HorizontalAlignment="Left"
                                 FlowDirection="LeftToRight"
                                 Orientation="Horizontal"                               
@@ -169,13 +170,12 @@
                             
                             
                         </StackPanel.Resources>
-                        
+
                         <Button 
                             Command="{Binding Path=DeleteCommand}"
-                            Content="Delete"
+                            Content="{Binding DelButtonText, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                             x:Name="DelButton"
                             >
-                            
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">
                                     <Setter Property="CornerRadius" Value="10"/>
@@ -185,7 +185,7 @@
                         <Button 
                             Command="{Binding Path=MarkAsDoneCommand}"
                             Uid="BtnDone"
-                            Content="Done"
+                            Content="{Binding SubmitButtonText}"
                             
                             >
                             <Button.Resources>
@@ -211,6 +211,7 @@
                                 <Style TargetType="{x:Type Border}">
                                     <Setter Property="CornerRadius" Value="15"/>
                                 </Style>
+                                
                             </Button.Resources>
                         </Button>
                     </StackPanel>

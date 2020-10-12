@@ -101,6 +101,9 @@
     <Compile Include="Controlls\Commands\RelayCommand.cs" />
     <Compile Include="Controlls\CustomPropertys\BackgroundHelper.cs" />
     <Compile Include="Controlls\CustomPropertys\DeleteHelper.cs" />
+    <Compile Include="Controlls\NewTaskControll.xaml.cs">
+      <DependentUpon>NewTaskControll.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controlls\TaskCardControll.xaml.cs">
       <DependentUpon>TaskCardControll.xaml</DependentUpon>
     </Compile>
@@ -118,6 +121,7 @@
     <Compile Include="Models\events\NewEntryEventArgs.cs" />
     <Compile Include="Models\events\StatusUpdateEventArgs.cs" />
     <Compile Include="Models\Exeption\InvalidInputException.cs" />
+    <Compile Include="ValueConverters\BoolToVisibilityConverter.cs" />
     <Compile Include="ValueConverters\ColorConverter.cs" />
     <Compile Include="ValueConverters\OpacityConverter.cs" />
     <Compile Include="ViewModels\Base\ModelBase.cs" />
@@ -140,6 +144,10 @@
     <Compile Include="Views\NewTaskView.xaml.cs">
       <DependentUpon>NewTaskView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controlls\NewTaskControll.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controlls\TaskCardControll.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

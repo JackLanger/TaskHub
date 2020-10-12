@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TaskHub"
-             xmlns:ViewModels="clr-namespace:TaskHub.ViewModels" x:Class="TaskHub.TaskCardListControll"
+             xmlns:ViewModels="clr-namespace:TaskHub.ViewModels" 
+             x:Class="TaskHub.TaskCardListControll"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
     >
@@ -26,20 +27,21 @@
         </Style>
     </UserControl.Resources>
 
-        
+
     <Grid 
-        Background="{StaticResource HintOfElusiveBlueBrush}"
-        >
+            Background="{StaticResource HintOfElusiveBlueBrush}"
+            >
         <Grid.DataContext>
             <ViewModels:MainViewModel/>
         </Grid.DataContext>
 
         <ScrollViewer>
             <ItemsControl 
-                            ItemsSource="{Binding TasksList}"
-                            Margin="5"
-                            Padding="5" 
-                            >
+                ItemsSource="{Binding TasksList}"
+                Margin="5"
+                Padding="5" 
+                Grid.Column="0"
+                >
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel/>
@@ -47,15 +49,10 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <!--create the data temp here-->
-
                         <local:TaskCardControll/>
-
-
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
     </Grid>
-
 </UserControl>

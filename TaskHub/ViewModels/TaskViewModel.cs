@@ -15,7 +15,6 @@ namespace TaskHub.ViewModels
     {
 
 
-
         #region private members
 
         private TaskModel _Model;
@@ -27,12 +26,28 @@ namespace TaskHub.ViewModels
         private string _TaskStatus;
         private bool _CanDelete;
         private bool _IsActive;
+        private string _DelButtonText;
+        private string _SubmitButtonText;
 
-        
+
+
         public DateTime DateAdded { get; set; }
         public string PostedBy { get; set; }
-
         
+        public string SubmitButtonText
+        {
+            get { return _SubmitButtonText; }
+            set { _SubmitButtonText = value; }
+        }
+        public string DelButtonText
+        {
+            get => _DelButtonText;
+            set
+            {
+                _DelButtonText = value;
+                OnPropertyChanged();
+            }
+        }
 
 
         public TaskModel Model
@@ -113,7 +128,7 @@ namespace TaskHub.ViewModels
         private ICommand _DeleteCommand;
 
 
-        public ICommand MarkAsDoneCommand => _MarkAsDoneCommand ??= new RelayCommand(() => CheckInactive());
+        public ICommand MarkAsDoneCommand => _MarkAsDoneCommand ??= new RelayCommand(() => AddOrUpdateEntry());
         public ICommand DeleteCommand => _DeleteCommand ??= new RelayCommand(() => OnDeleteThis());
 
         #endregion
@@ -131,6 +146,8 @@ namespace TaskHub.ViewModels
             DateAdded = _Model.DateAdded;
             PostedBy = _Model.PostedBy;
             _IsActive = _Model.isActive;
+            _DelButtonText = "Delete";
+            _SubmitButtonText = _TaskName == "new Task" ? "add" : "Done";
         }
 
         #endregion
@@ -141,13 +158,23 @@ namespace TaskHub.ViewModels
         /// <summary>
         /// TODO: implement check active  and CHeck Active COmmands 
         /// </summary>
-        private void CheckInactive() => _IsActive = false;
+        private void AddOrUpdateEntry()
+        {
 
-        private void OnDeleteThis() => _Model.DeleteEntry();
+        }
 
+        private void OnDeleteThis()
+            
+        {
+            _DelButtonText = _DelButtonText == "Delete" ? "Confirm" : "Delete";
+
+
+            if (_CanDelete) 
+                _Model.DeleteEntry();
+
+            _CanDelete = _CanDelete ? false : true;
+        }
 
         #endregion
-
-
     }
 }

@@ -16,55 +16,55 @@ using System.Windows.Shapes;
 namespace TaskHub
 {
     /// <summary>
-    /// Interaction logic for TaskCardControll.xaml
+    /// Interaction logic for NewTaskControll.xaml
     /// </summary>
-    public partial class TaskCardControll : UserControl
+    public partial class NewTaskControll : UserControl
     {
-        public TaskCardControll()
+        public NewTaskControll()
         {
             InitializeComponent();
         }
 
-        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        private void TbTaskDescr_GotFocus(object sender, RoutedEventArgs e)
         {
             var tb = sender as TextBox;
+            if (tb.Text == "Taskdescription")
+            {
+                tb.Clear();
+                tb.Foreground = Brushes.Black;
+            }
+            else return;
+        }
 
+        private void TbTaskDescr_LostFocus(object sender, RoutedEventArgs e)
+        {
+            var tb = sender as TextBox;
+            if (tb.Text == "")
+            {
+                tb.Text = "Taskdescription";
+                tb.Foreground = Brushes.LightGray;
+            }
+            else return;
+        }
+
+        private void TbTaskName_GotFocus(object sender, RoutedEventArgs e)
+        {
+            var tb = sender as TextBox;
             if (tb.Text == "new Task")
             {
                 tb.Clear();
+                tb.Foreground = Brushes.Black;
             }
             else return;
         }
 
-        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        private void TbTaskName_LostFocus(object sender, RoutedEventArgs e)
         {
             var tb = sender as TextBox;
-
             if (tb.Text == "")
             {
                 tb.Text = "new Task";
-            }
-            else return;
-        }
-
-        private void TextBox_GotFocus_1(object sender, RoutedEventArgs e)
-        {
-            var tb = sender as TextBox;
-
-            if (tb.Text == "description")
-            {
-                tb.Clear();
-            }
-            else return;
-        }
-
-        private void TextBox_LostFocus_1(object sender, RoutedEventArgs e)
-        {
-            var tb = sender as TextBox;
-
-            if (tb.Text == "")
-            {
-                tb.Text = "description";
+                tb.Foreground = Brushes.LightGray;
             }
             else return;
         }

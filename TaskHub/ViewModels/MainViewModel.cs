@@ -31,10 +31,9 @@ namespace TaskHub.ViewModels
         private TaskModel _TaskModel;
         private ApplicationPage _CurrentPage = ApplicationPage.Home;
 
+        
 
-        #endregion
 
-        #region public propertys
         public ApplicationPage CurrentPage
         {
             get => _CurrentPage;
@@ -111,9 +110,23 @@ namespace TaskHub.ViewModels
             {
                 TasksList.Add(new TaskViewModel(task));
                 task.DeleteThis += Task_DeleteThis;
+                task.AddNewOrUpdateEntry += Task_AddNewOrUpdateEntry;
             }
+            TasksList.Add(new TaskViewModel(new TaskModel()));
 
             _User = new UserModel() {UserName = "jack" };
+        }
+
+        private void Task_AddNewOrUpdateEntry(TaskModel sender)
+        {
+
+            var newEntry = from items in TasksList 
+                           where items.Model.TaskId == sender.TaskId 
+                           select sender.TaskId;
+
+
+
+
         }
 
         private void Task_DeleteThis(TaskModel model, EventArgs deleteThisArgs)
@@ -169,10 +182,6 @@ namespace TaskHub.ViewModels
         /// <summary>
         /// TODO: Check of Task and make inaccessible while marked as done
         /// </summary>
-        private void MarkAsDone()
-        {
-            
-        }
         
         #endregion
     }

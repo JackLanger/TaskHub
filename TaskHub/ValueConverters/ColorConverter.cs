@@ -21,6 +21,9 @@ namespace TaskHub
                 nameof(ActivityCheck.inactive) => converter.ConvertFrom("#d2dae2"),
                 nameof(ActivityCheck.inProgress) => converter.ConvertFrom("#ffa801"),
                 nameof(ActivityCheck.urgent) => converter.ConvertFrom("#ff3f34"),
+                "Confirm" => converter.ConvertFrom ("#ff3f34"),
+                "Delete" => converter.ConvertFrom ("#fff"),
+                "Done" => converter.ConvertFrom("#05c46b"),
                 _ => converter.ConvertFrom("#fff")
             };
             return background;
