@@ -11,16 +11,15 @@ using TaskHub.Model;
 
 namespace TaskHub.ViewModels
 {
+    public delegate void newEntryHandler(TaskViewModel sender);
+
     public class TaskViewModel : ModelBase
     {
-
+        public event newEntryHandler newOrUpdateEntry;
 
         #region private members
 
         private TaskModel _Model;
-
-
-
         private string _TaskName;
         private string _TaskDescription;
         private string _TaskStatus;
@@ -128,7 +127,7 @@ namespace TaskHub.ViewModels
         private ICommand _DeleteCommand;
 
 
-        public ICommand MarkAsDoneCommand => _MarkAsDoneCommand ??= new RelayCommand(() => AddOrUpdateEntry());
+        public ICommand MarkAsDoneCommand => _MarkAsDoneCommand ??= new RelayCommand(() => OnNewOrUpdateEntry());
         public ICommand DeleteCommand => _DeleteCommand ??= new RelayCommand(() => OnDeleteThis());
 
         #endregion
@@ -158,18 +157,16 @@ namespace TaskHub.ViewModels
         /// <summary>
         /// TODO: implement check active  and CHeck Active COmmands 
         /// </summary>
-        private void AddOrUpdateEntry()
-        {
 
-        }
 
+        private void OnNewOrUpdateEntry() => newOrUpdateEntry?.Invoke(this); 
         private void OnDeleteThis()
             
         {
             _DelButtonText = _DelButtonText == "Delete" ? "Confirm" : "Delete";
 
 
-            if (_CanDelete) 
+            //if (_CanDelete) 
                 _Model.DeleteEntry();
 
             _CanDelete = _CanDelete ? false : true;

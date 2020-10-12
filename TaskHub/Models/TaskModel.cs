@@ -116,7 +116,7 @@ namespace TaskHub.Model
 
         protected virtual void OnDeleteThis() => DeleteThis?.Invoke(this, new EventArgs());
 
-        public void UpdateStatusInDb() => DataAccess.UpdateDb(this);
+        public void UpdateEntry() => DataAccess.UpdateDb(this);
 
         public void NewEntry() => DataAccess.WriteNewEntry(this);
 

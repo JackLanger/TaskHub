@@ -110,23 +110,33 @@ namespace TaskHub.ViewModels
             {
                 TasksList.Add(new TaskViewModel(task));
                 task.DeleteThis += Task_DeleteThis;
-                task.AddNewOrUpdateEntry += Task_AddNewOrUpdateEntry;
             }
             TasksList.Add(new TaskViewModel(new TaskModel()));
 
             _User = new UserModel() {UserName = "jack" };
+
+            foreach ( var taskVM in TasksList)
+            {
+                taskVM.newOrUpdateEntry += TaskVM_newOrUpdateEntry;
+            }
         }
 
-        private void Task_AddNewOrUpdateEntry(TaskModel sender)
+
+        /// <summary>
+        /// HACK: check if the sender is the last entry in the list if thats the case add new entry else update old one
+        /// </summary>
+        /// <param name="sender"></param>
+        private void TaskVM_newOrUpdateEntry(TaskViewModel sender)
         {
+            
+                    if (sender == TasksList[TasksList.Count - 1])
+            {
+                sender.Model.NewEntry();
+                TasksList.Prepend(sender);
 
-            var newEntry = from items in TasksList 
-                           where items.Model.TaskId == sender.TaskId 
-                           select sender.TaskId;
-
-
-
-
+            }
+            else
+                sender.Model.UpdateEntry();
         }
 
         private void Task_DeleteThis(TaskModel model, EventArgs deleteThisArgs)
@@ -143,14 +153,7 @@ namespace TaskHub.ViewModels
         #region Methods
 
 
-        internal void UpdateTaskModel(Object task)
-        {
-            var t = task as TaskModel;
-            _ActiveTask.TaskName = t.TaskName;
-            _ActiveTask.TaskDescription = t.TaskDescription;
-            _ActiveTask.TaskStatus = t.TaskStatus;
-            _ActiveTask.PostedBy = t.PostedBy;
-        }
+        
 
 
         public void AddNewEntry(string taskName, string taskDescr, string status, bool active = true)
