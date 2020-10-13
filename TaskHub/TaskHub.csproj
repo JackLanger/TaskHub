@@ -129,6 +129,7 @@
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="ValueConverters\AppPageValueConverter.cs" />
     <Compile Include="ValueConverters\BaseValueConverter.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />
     <Compile Include="Views\DataGridView.xaml.cs">

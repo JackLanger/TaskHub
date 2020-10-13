@@ -113,7 +113,7 @@ namespace TaskHub.ViewModels
             }
             TasksList.Add(new TaskViewModel(new TaskModel()));
 
-            _User = new UserModel() {UserName = "jack" };
+            
 
             foreach ( var taskVM in TasksList)
             {
