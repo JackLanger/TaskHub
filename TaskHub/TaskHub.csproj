@@ -99,8 +99,8 @@
     </ApplicationDefinition>
     <Compile Include="Controlls\Commands\ParameterizedRelayCommand.cs" />
     <Compile Include="Controlls\Commands\RelayCommand.cs" />
-    <Compile Include="Controlls\CustomPropertys\BackgroundHelper.cs" />
-    <Compile Include="Controlls\CustomPropertys\DeleteHelper.cs" />
+    <Compile Include="Controlls\AttachedPropertys\BackgroundHelper.cs" />
+    <Compile Include="Controlls\AttachedPropertys\DeleteHelper.cs" />
     <Compile Include="Controlls\NewTaskControll.xaml.cs">
       <DependentUpon>NewTaskControll.xaml</DependentUpon>
     </Compile>
@@ -121,7 +121,6 @@
     <Compile Include="Models\events\NewEntryEventArgs.cs" />
     <Compile Include="Models\events\StatusUpdateEventArgs.cs" />
     <Compile Include="Models\Exeption\InvalidInputException.cs" />
-    <Compile Include="ValueConverters\BoolToVisibilityConverter.cs" />
     <Compile Include="ValueConverters\ColorConverter.cs" />
     <Compile Include="ValueConverters\OpacityConverter.cs" />
     <Compile Include="ViewModels\Base\ModelBase.cs" />
@@ -132,9 +131,6 @@
     <Compile Include="ValueConverters\BaseValueConverter.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />
-    <Compile Include="Views\CardView.xaml.cs">
-      <DependentUpon>CardView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\DataGridView.xaml.cs">
       <DependentUpon>DataGridView.xaml</DependentUpon>
     </Compile>
@@ -173,10 +169,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Fonts.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\CardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using TaskHub.Model;
+using TaskHub.Models;
 using TaskHub.ViewModels;
 
 namespace TaskHub.DAL
@@ -29,8 +30,11 @@ namespace TaskHub.DAL
             using (var con = new SqlConnection(@"Data Source=desktop-ihdvud3\sqlexpress;Initial Catalog=TaskTracker;Integrated Security=True"))
             {
                 con.Execute("dbo.UPDATE_Task " +
-                    "@isActive,"+
-                    "@TaskID " 
+                    "@TaskID,"+
+                    "@TaskName,"+
+                    "@TaskDescription," +
+                    "@isActive," +
+                    "@TaskStatus" 
                     , model);
             }
         }
@@ -50,10 +54,27 @@ namespace TaskHub.DAL
             }
         }
 
+        public static void GetUser(UserModel userModel)
+        {
+            using (var con = new SqlConnection(@"Data Source=desktop-ihdvud3\sqlexpress;Initial Catalog=TaskTracker;Integrated Security=True"))
+            {
+                con.Execute(@"dbo.SELECT_User, @UserID");
+            }
+        }
+
         public static void RemoveEntry(TaskModel model)
         {
             using (var con = new SqlConnection(@"Data Source=desktop-ihdvud3\sqlexpress;Initial Catalog=TaskTracker;Integrated Security=True"))
                 con.Execute(@"dbo.DELETE_Task @TaskID", model);
+        }
+
+
+        public static void RegisterNewUser(UserModel user)
+        {
+            using( var con = new SqlConnection (@"Data Source=desktop-ihdvud3\sqlexpress;Initial Catalog=TaskTracker;Integrated Security=True"))
+            {
+                con.Execute(@"dbo.INSERT_User @UserName,@UserType");
+            }
         }
 
     }

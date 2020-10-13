@@ -93,7 +93,7 @@ namespace TaskHub.Model
         
         #region Constructor
 
-        public TaskModel() : this("new Task", "unknown", "description", "inactive", true)
+        public TaskModel() : this("new Task", "unknown", "description", "active", true)
         {
 
         }

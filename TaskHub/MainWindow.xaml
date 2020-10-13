@@ -67,9 +67,6 @@
 
             <Button Command="{Binding Path=HomeCommand}" >Home</Button>
             <Button Command="{Binding Path=DataGridCommand}">Grid view</Button>
-            <Button Command="{Binding Path=NewTaskCommand}">add Task</Button>
-            <Button >Card view</Button>
-            <Button IsEnabled="False"></Button>
             <Button >Profile</Button>
             <Button >Exit</Button>
 

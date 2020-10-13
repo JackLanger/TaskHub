@@ -73,7 +73,7 @@
                     <Style TargetType="{x:Type DataGridCell}">
                         <Setter Property="MinWidth" Value="20"/>
                         <Setter Property="HorizontalContentAlignment" Value="Right"/>
-                        
+
                     </Style>
                     <Style TargetType="{x:Type DataGridColumnHeader}">
                         <Setter Property="Background" Value="#1e272e"/>
@@ -88,21 +88,16 @@
 
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn x:Name="DeleteCheckBox" Width="20"/>
-                    <DataGridTextColumn Header="ID" Binding="{Binding TaskId}" Width="50" IsReadOnly="True"  x:Name="IDCell"/>
-                    <DataGridTextColumn Header="Task" Binding="{Binding TaskName}" />
-                    <DataGridTextColumn Header="Date Added" Binding="{Binding DateAdded}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Posted by" Binding="{Binding PostedBy}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Status" Binding="{Binding TaskStatus}"/>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Model.TaskId}" Width="50" IsReadOnly="True"  x:Name="IDCell"/>
+                    <DataGridTextColumn Header="Task" Binding="{Binding Model.TaskName}" />
+                    <DataGridTextColumn Header="Date Added" Binding="{Binding Model.DateAdded}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Posted by" Binding="{Binding Model.PostedBy}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Status" Binding="{Binding Model.TaskStatus}"/>
                     <DataGridTemplateColumn Header="Info" x:Name="Info" />
                 </DataGrid.Columns>
 
 
             </DataGrid>
-
-            <!--<Button Grid.Column="5" Grid.Row="6" 
-                HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                Margin="5" x:Name="UpdateDB"
-                >update</Button>-->
         </Grid>
     </Grid>
 </Page>

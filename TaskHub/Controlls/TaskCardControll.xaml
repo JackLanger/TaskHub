@@ -20,7 +20,7 @@
                 BorderBrush="{StaticResource LondonSquareBrush}"
                 BorderThickness="1"
                 Margin="10"
-                Opacity="{Binding IsActive, Converter={local:OpacityConverter}}"
+                Opacity="{Binding Model.IsActive, Converter={local:OpacityConverter}}"
                 >
                 <Border.BitmapEffect>
                     <DropShadowBitmapEffect
@@ -41,7 +41,6 @@
                         <RowDefinition Height="5"/>
                     </Grid.RowDefinitions>
 
-
                     <Border
                         Grid.Row="0"
                         Height="auto"
@@ -52,12 +51,16 @@
                             CornerRadius="9 9 0 0"
                             >
                             <TextBox
-                                Text="{Binding TaskName}"
+                                Text="{Binding Model.TaskName}"
                                 Background="{StaticResource MintGreenBrush}"
                                 FontFamily="{StaticResource InterBold}"
                                 FontSize="{StaticResource FontSizeRegular}"
                                 FontWeight="Bold"
                                 BorderThickness="0"
+                                Width="170"
+                                Height="auto"
+                                MaxLines="2"
+                                MaxLength="40"
                                 TextWrapping="Wrap"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
@@ -66,18 +69,20 @@
                                 LostFocus="TextBox_LostFocus"
                                 Name="TbTaskName"
                                 >
+                                
                             </TextBox>
                         </Border>
                     </Border>
 
                     <TextBox 
                         Grid.Row="1"
-                        Text="{Binding TaskDescription}"
+                        Text="{Binding Model.TaskDescription}"
                         FontFamily="{StaticResource InterBlack}"
                         FontSize="{StaticResource FontSizeSmall}"
                         VerticalAlignment="Top"
                         TextWrapping="Wrap"
                         AcceptsReturn="True"
+                        MaxLength="2000"
                         Margin="5"
                         Padding="5"
                         BorderBrush="White"
@@ -92,7 +97,7 @@
                     
                         <TextBlock 
                                 Margin="5"
-                                Text="{Binding DateAdded, Mode=OneWay}"
+                                Text="{Binding Model.DateAdded, Mode=OneWay}"
                             VerticalAlignment="Center"
                                 />
                         
@@ -112,7 +117,7 @@
                                     />
                             </Border.BitmapEffect>
                             <TextBlock 
-                                Text="{Binding PostedBy}"
+                                Text="{Binding Model.PostedBy}"
                                 Margin="5"
                                 FontWeight="Bold" 
                                 Padding="3"
@@ -173,7 +178,7 @@
 
                         <Button 
                             Command="{Binding Path=DeleteCommand}"
-                            Content="{Binding DelButtonText, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                            Content="{Binding DelButtonText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             x:Name="DelButton"
                             >
                             <Button.Resources>
@@ -196,12 +201,12 @@
                         </Button>
 
                         <Button 
-                            Content="{Binding TaskStatus}"
+                            Content="{Binding Model.TaskStatus}"
                             Width="70"
                             Height="25"
                             Name="BtnStatus" 
                             Foreground="{StaticResource BlacPearlBrush}"
-                            Background="{Binding TaskStatus, Converter={local:ColorConverter}}"
+                            Background="{Binding Model.TaskStatus, Converter={local:ColorConverter}}"
                             BorderBrush="{StaticResource MintGreenBrush}"
                             FontFamily="{StaticResource InterBold}"
                             FontSize="{StaticResource FontSizeRegular}"
