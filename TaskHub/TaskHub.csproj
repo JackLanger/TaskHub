@@ -101,8 +101,14 @@
     <Compile Include="Controlls\Commands\RelayCommand.cs" />
     <Compile Include="Controlls\AttachedPropertys\BackgroundHelper.cs" />
     <Compile Include="Controlls\AttachedPropertys\DeleteHelper.cs" />
+    <Compile Include="Controlls\LoginControl.xaml.cs">
+      <DependentUpon>LoginControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controlls\NewTaskControll.xaml.cs">
       <DependentUpon>NewTaskControll.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controlls\RegisterControl.xaml.cs">
+      <DependentUpon>RegisterControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controlls\TaskCardControll.xaml.cs">
       <DependentUpon>TaskCardControll.xaml</DependentUpon>
@@ -138,10 +144,21 @@
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NewTaskView.xaml.cs">
       <DependentUpon>NewTaskView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controlls\LoginControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controlls\NewTaskControll.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlls\RegisterControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -178,6 +195,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

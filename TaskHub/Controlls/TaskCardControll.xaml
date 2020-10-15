@@ -172,13 +172,11 @@
                                 </Style.Triggers>
                             </Style>
 
-                            
-                            
                         </StackPanel.Resources>
 
                         <Button 
                             Command="{Binding Path=DeleteCommand}"
-                            Content="{Binding DelButtonText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Content="{Binding DelButtonText, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                             x:Name="DelButton"
                             >
                             <Button.Resources>

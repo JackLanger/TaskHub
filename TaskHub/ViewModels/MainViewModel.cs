@@ -29,10 +29,14 @@ namespace TaskHub.ViewModels
         private List<TaskModel> data = new List<TaskModel>();
         private TaskModel _ActiveTask;
         private TaskModel _TaskModel;
-        private ApplicationPage _CurrentPage = ApplicationPage.Home;
+        private ApplicationPage _CurrentPage = ApplicationPage.LoginPage;
+        private LoginViewModel _loginViewModel;
 
-        
-
+        public LoginViewModel LoginViewModel
+        {
+            get { return _loginViewModel; }
+            set { _loginViewModel = value; }
+        }
 
         public ApplicationPage CurrentPage
         {
@@ -87,7 +91,9 @@ namespace TaskHub.ViewModels
         private ICommand _HomeCommand;
         private ICommand _DataGridCommand;
         private ICommand _NewTaskCommand;
-        
+        private ICommand _LoginCommand;
+
+        public ICommand LoginCommand => _LoginCommand ??= new RelayCommand(() => CurrentPage = ApplicationPage.LoginPage);
         public ICommand HomeCommand => _HomeCommand ??= new RelayCommand(() => CurrentPage = ApplicationPage.Home);
         public ICommand DataGridCommand => _DataGridCommand ??= new RelayCommand(() => CurrentPage = ApplicationPage.DataGrid);
         public ICommand NewTaskCommand => _NewTaskCommand ??= new RelayCommand(() => CurrentPage = ApplicationPage.NewTask);
@@ -104,6 +110,7 @@ namespace TaskHub.ViewModels
         {
             data = DataAccess.ReadTaskDB().ToList();
             TasksList = new ObservableCollection<TaskViewModel>();
+            _loginViewModel = new LoginViewModel();
 
 
             foreach (var task in DataAccess.ReadTaskDB())
@@ -119,7 +126,28 @@ namespace TaskHub.ViewModels
             {
                 taskVM.newOrUpdateEntry += TaskVM_newOrUpdateEntry;
             }
+
+            _loginViewModel.LoginSuccessful += _loginViewModel_LoginSuccessful;
         }
+
+        private void _loginViewModel_ViewChanged(ApplicationPage page)
+        {
+            CurrentPage = _loginViewModel.CurrentPage;
+        }
+
+        private void _loginViewModel_LoginSuccessful(object sender)
+        {
+            _User = sender as UserModel;
+            _CurrentPage = ApplicationPage.Home;
+        }
+
+
+
+        #endregion
+
+        #region Methods
+
+
 
 
         /// <summary>
@@ -133,6 +161,7 @@ namespace TaskHub.ViewModels
             {
                 sender.Model.NewEntry();
                 TasksList.Prepend(sender);
+                TasksList.Add(new TaskViewModel(new TaskModel()));
 
             }
             else
@@ -147,25 +176,6 @@ namespace TaskHub.ViewModels
                 TasksList.RemoveAt(i); 
             }
         }
-
-        #endregion
-
-        #region Methods
-
-
-        
-
-
-        public void AddNewEntry(string taskName, string taskDescr, string status, bool active = true)
-        {
-            var task = new TaskModel(taskName, _User.UserName, taskDescr, status, active);
-            task.NewEntry();
-            _TasksList.Add(new TaskViewModel(task));
-
-            CollectionViewSource.GetDefaultView(_TasksList).Refresh();
-
-        }
-
         public void FilterData(string filter)
         {
             _TasksList.Clear();
@@ -185,7 +195,9 @@ namespace TaskHub.ViewModels
         /// <summary>
         /// TODO: Check of Task and make inaccessible while marked as done
         /// </summary>
-        
+
         #endregion
+
+
     }
 }

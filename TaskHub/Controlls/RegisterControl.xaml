@@ -1,0 +1,198 @@
+﻿<UserControl x:Class="TaskHub.RegisterControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TaskHub"
+             xmlns:ViewModels="clr-namespace:TaskHub.ViewModels" 
+             mc:Ignorable="d" 
+             Height="450" Width="400"
+             d:DesignHeight="450" d:DesignWidth="400">
+
+    <UserControl.Resources>
+
+        <Style TargetType="{x:Type Border}">
+            <Setter Property="CornerRadius" Value="15"/>
+            <Setter Property="BorderBrush" Value="{StaticResource HintOfElusiveBlueBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="5" />
+        </Style>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="{StaticResource InterBold}" />
+            <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
+            <Setter Property="Foreground" Value="{StaticResource HintOfElusiveBlueBrush}" />
+            <Setter Property="CaretBrush" Value="{StaticResource HintOfElusiveBlueBrush}" />
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="MaxLength" Value="20" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
+        <Style TargetType="{x:Type PasswordBox}">
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Style.Resources>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="{StaticResource InterBold}" />
+            <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
+            <Setter Property="Foreground" Value="{StaticResource HintOfElusiveBlueBrush}" />
+            <Setter Property="CaretBrush" Value="{StaticResource HintOfElusiveBlueBrush}" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="FontFamily" Value="{StaticResource InterBlack}"/>
+            <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
+            <Setter Property="Foreground" Value="{StaticResource HintOfElusiveBlueBrush}"/>
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+        <Style TargetType="{x:Type Button}">
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Style.Resources>
+            <Setter Property="Background" Value="{StaticResource LondonSquareBrush}"/>
+            <Setter Property="FontFamily" Value="{StaticResource InterBold}" />
+            <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
+            <Setter Property="FontWeight" Value="500" />
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="auto" />
+            <Setter Property="MinHeight" Value="25" />
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource ChromeYellowBrush}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+
+    <UserControl.DataContext>
+        <ViewModels:LoginViewModel/>
+    </UserControl.DataContext>
+
+
+    <Border Background="{StaticResource BlacPearlBrush}">
+        <Border.BitmapEffect>
+            <DropShadowBitmapEffect
+                Color="{StaticResource LondonSquare}"
+                ShadowDepth="7"
+                Softness="3"
+                Opacity="0.5"
+                />
+        </Border.BitmapEffect>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel
+                Margin="0 10 0 0"
+                Grid.Column="1"
+                Orientation="Vertical"
+                
+                >
+                <StackPanel
+                    Margin="5"
+                    Orientation="Vertical"
+                    >
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="User Name"/>
+                        <TextBlock Name="ErrorMsgUserName" 
+                                   Foreground="{StaticResource ChromeYellowBrush}" 
+                                   FontSize="{StaticResource FontSizeSmall}" Text=""/>
+                    </StackPanel>
+                    <Border>
+                        <TextBox
+                            Text="{Binding UserName}"
+                            Height="25"
+                            />
+                    </Border>
+                </StackPanel>
+                <StackPanel
+                    Margin="5"
+                    Orientation="Vertical"
+                    >
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Password"/>
+                        <TextBlock Name="errorMsgPw" 
+                                   Foreground="{StaticResource ChromeYellowBrush}" 
+                                   FontSize="{StaticResource FontSizeSmall}" Text=""/>
+                    </StackPanel>
+                    <Border>
+                        <PasswordBox
+                            Name="PWBox"
+                            PasswordChar="{Binding PassW}"
+                            Height="25"
+                            />
+                    </Border>
+                </StackPanel>
+                <StackPanel
+                    Margin="5"
+                    Orientation="Vertical"
+                    >
+                    <TextBlock Text="confirm Password"/>
+                    <Border>
+                        <PasswordBox
+                            Name="PWBoxConfirm"
+                            Height="25"
+                            />
+                    </Border>
+                </StackPanel>
+                <Button
+                    Command="{Binding RegisterNewUserCommand}"
+                    Content="Submit"
+                    >
+                    
+                </Button>
+                <Button
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Cursor="Hand"
+                    Width="auto"
+                    FontSize="{StaticResource FontSizeSmall}"
+                    Foreground="{StaticResource FreshSpeachBlueBrush}"
+                    Command="{Binding Path=GoToLoginCommand}"
+                    >I've allready got an account, Sign me In</Button>
+            </StackPanel>
+            
+        </Grid>
+    </Border>
+</UserControl>

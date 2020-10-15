@@ -14,7 +14,7 @@ namespace TaskHub.Models
 
         private string _UserName;
         private string _UserType;
-        private SecureString _Password;
+        private string _Password;
 
         #endregion
 
@@ -40,7 +40,7 @@ namespace TaskHub.Models
             }
         }
 
-        public SecureString Password
+        public string Password
         {
             get { return _Password; }
             set { _Password = value; }
@@ -50,9 +50,9 @@ namespace TaskHub.Models
 
         #region Constructor
 
-        public UserModel(string name, SecureString password) : this(name, password, "standardUser") { }
+        public UserModel(string name, string password) : this(name, password, "standardUser") { }
 
-        public UserModel(string name, SecureString password, string Type = "standardUser")
+        public UserModel(string name, string password, string Type = "standardUser")
         {
             _UserName = name;
             _Password = password;
@@ -62,8 +62,16 @@ namespace TaskHub.Models
         #endregion
 
         public void RegisterNewUser() => DataAccess.RegisterNewUser(this);
+        public void GetUser(string userName) => DataAccess.GetUser(userName);
+        /// <summary>
+        /// TODO:implement hashing of UserName so we can retrive UserKey dynamically and don't have to save it to DB
+        /// </summary>
+        /// <returns></returns>
+        private string GetKey() => _UserName;
 
-        public void GetUser() => DataAccess.GetUser(this);
-
+        public string GetPass()
+        {
+            return DataAccess.FetchPassword(GetKey());
+        }
     }
 }

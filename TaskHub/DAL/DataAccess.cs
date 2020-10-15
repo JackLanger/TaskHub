@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
@@ -54,14 +55,30 @@ namespace TaskHub.DAL
             }
         }
 
-        public static void GetUser(UserModel userModel)
+        public static void GetUser(string userName)
         {
-            using (var con = new SqlConnection(@"Data Source=desktop-ihdvud3\sqlexpress;Initial Catalog=TaskTracker;Integrated Security=True"))
+            try
             {
-                con.Execute(@"dbo.SELECT_User, @UserID");
+                using (var con = new SqlConnection(@"Data Source=desktop-ihdvud3\sqlexpress;Initial Catalog=TaskTracker;Integrated Security=True"))
+                {
+                    con.Query(@"dbo.SELECT_User, @UserName");
+                }
+            }
+            catch
+            {
+                throw new NotImplementedException();
             }
         }
 
+        public static string FetchPassword(string UserKey)
+        {
+            string pass ="";
+            using (var con = new SqlConnection(@"Data Source=desktop-ihdvud3\sqlexpress;Initial Catalog=TaskTracker;Integrated Security=True"))
+            {
+                pass = con.Query<string>(@"dbo.FetchPass, @UserKey").ToString();
+            }
+            return pass;
+        }
         public static void RemoveEntry(TaskModel model)
         {
             using (var con = new SqlConnection(@"Data Source=desktop-ihdvud3\sqlexpress;Initial Catalog=TaskTracker;Integrated Security=True"))
@@ -76,6 +93,5 @@ namespace TaskHub.DAL
                 con.Execute(@"dbo.INSERT_User @UserName,@UserType");
             }
         }
-
     }
 }

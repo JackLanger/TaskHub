@@ -29,12 +29,17 @@
         <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
         <Setter Property="Foreground" Value="{StaticResource BlacPearlBrush}"/>
     </Style>
+    <Style TargetType="{x:Type Control}" x:Key="ButtonStyle">
+        <Setter Property="FontFamily" Value="{StaticResource InterThinItalic}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}" />
+        <Setter Property="Foreground" Value="{StaticResource BlacPearlBrush}"/>
+    </Style>
     <Style TargetType="{x:Type TextBlock}" x:Key="BaseTextBlockStyle">
         <Setter Property="FontFamily" Value="{StaticResource InterLight}" />
         <Setter Property="FontSize" Value="{StaticResource FontSizeSmall}" />
     </Style>
     <!--#endregion-->
-    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource BaseStyle}" />
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonStyle}" />
     <Style TargetType="{x:Type Label}" BasedOn="{StaticResource BaseStyle}" />
     <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource BaseStyle}" />
     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseTextBlockStyle}" />

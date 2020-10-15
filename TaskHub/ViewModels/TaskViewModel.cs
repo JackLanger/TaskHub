@@ -106,15 +106,22 @@ namespace TaskHub.ViewModels
         /// </summary>
 
 
-        private void OnNewOrUpdateEntry() => newOrUpdateEntry?.Invoke(this); 
+        private void OnNewOrUpdateEntry()
+        {
+
+            if (_SubmitButtonText == "add")
+                newOrUpdateEntry?.Invoke(this);
+
+            else  _Model.IsActive = _Model.IsActive? false:true;
+        }
+
         private void OnDeleteThis()
             
         {
             _DelButtonText = _DelButtonText == "Delete" ? "Confirm" : "Delete";
-
-
-            //if (_CanDelete) 
-            //    _Model.DeleteEntry();
+            
+            if (_CanDelete) 
+                _Model.DeleteEntry();
 
             _CanDelete = _CanDelete ? false : true;
         }

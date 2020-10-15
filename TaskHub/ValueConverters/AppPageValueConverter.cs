@@ -17,6 +17,9 @@ namespace TaskHub
         {
             object output = ((ApplicationPage)value) switch
             {
+                ApplicationPage.LoginPage => new LoginView(),
+                ApplicationPage.Login => new LoginControl(),
+                ApplicationPage.Register => new RegisterControl(),
                 ApplicationPage.Home => new TaskCardListControll(),
                 ApplicationPage.DataGrid => new DataGridView(),
                 ApplicationPage.NewTask => new NewTaskView(),

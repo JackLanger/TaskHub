@@ -9,5 +9,8 @@ namespace TaskHub
         Home = 0,
         DataGrid,
         NewTask,
+        Login,
+        Register,
+        LoginPage
     }
 }

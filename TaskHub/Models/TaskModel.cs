@@ -78,7 +78,7 @@ namespace TaskHub.Model
             get => _TaskStatus;
             set => _TaskStatus = value;
         }
-        public bool isActive
+        public bool IsActive
         {
             get => _IsActive;
             set
