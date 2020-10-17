@@ -40,6 +40,7 @@
                 </Style>
             </Style.Resources>
             <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="33" />
             <Setter Property="HorizontalAlignment" Value="Right" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="FontFamily" Value="{StaticResource InterBold}" />
@@ -129,8 +130,12 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-
-
+            <TextBlock Grid.Column="1"
+                       Grid.ColumnSpan="2"
+                       Text="{Binding InvalidUserMsg, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                       Foreground="{StaticResource ChromeYellowBrush}"
+                       FontSize="{StaticResource FontSizeSmall}"
+                       />
             <TextBlock 
                     Grid.Row="1"
                     Grid.Column="1"
@@ -142,21 +147,22 @@
                 >
                 <TextBox
                     Height="33"
-                    Text="{Binding UserName}"
+                    Text="{Binding UserName,UpdateSourceTrigger=PropertyChanged}"
                     />
             </Border>
 
             <TextBlock 
                 Grid.Row="2"
                 Grid.Column="1"
-                Text="Password"/>
+                Text="Password"
+                />
             <Border
                 Grid.Row="2"
                 Grid.Column="2"
                 Height="33"
                 >
                 <PasswordBox
-                    PasswordChar="{Binding PassW}" Height="33"/>
+                    />
             </Border>
 
 
@@ -166,7 +172,8 @@
                 Grid.Column="1"
                 Grid.ColumnSpan="2"
                 Content="Login"
-                />
+                >
+            </Button>
 
             <Button
                 FontSize="{StaticResource FontSizeSmall}"

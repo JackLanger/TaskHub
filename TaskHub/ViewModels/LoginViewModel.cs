@@ -27,11 +27,11 @@ namespace TaskHub.ViewModels
 
         private UserModel _User = null;
         private string _UserName;
-        private string _PassW;
-        private ApplicationPage _CurrentPage = ApplicationPage.Register;
+        private SecureString _PassW;
+        private SecureString _PassConf;
+        private ApplicationPage _CurrentPage = ApplicationPage.Login;
         private string _LoginErrorMsg;
         private string _InvalidUserMsg;
-        private string _InvalidPasswordMsg;
 
         #endregion
 
@@ -47,7 +47,6 @@ namespace TaskHub.ViewModels
             }
         }
 
-
         public string InvalidUserMsg
         {
             get => _InvalidUserMsg;
@@ -57,17 +56,6 @@ namespace TaskHub.ViewModels
                 OnPropertyChanged();
             }
         }
-
-        public string InvalidPasswordMsg
-        {
-            get => _InvalidPasswordMsg;
-            set
-            {
-                _InvalidPasswordMsg = value;
-                OnPropertyChanged();
-            }
-        }
-
         public string LoginErrorMsg
         {
             get => _LoginErrorMsg;
@@ -94,16 +82,28 @@ namespace TaskHub.ViewModels
             set
             {
                 _UserName = value;
+                InvalidUserMsgClear();
                 OnPropertyChanged();
             }
         }
 
-        public string PassW
+        public SecureString PassW
         {
             get { return _PassW; }
             set
             {
                 _PassW = value;
+                InvalidUserMsgClear();
+                OnPropertyChanged();
+            }
+        }
+        public SecureString PassConf
+        {
+            get { return _PassConf; }
+            set
+            {
+                _PassConf = value;
+                InvalidUserMsgClear();
                 OnPropertyChanged();
             }
         }
@@ -117,13 +117,13 @@ namespace TaskHub.ViewModels
         private ICommand _ContinueLoginCommand;
         private ICommand _RegisterNewUserCommand;
         private ICommand _GoToLoginCommand;
-        private ICommand _GoToRegisterUser;
+        private ICommand _GoToRegisterUserCommand;
 
 
         public ICommand RegisterNewUserCommand => _RegisterNewUserCommand ?? new RelayCommand(() => RegisterNewUser());
         public ICommand LoginCommand => _LoginCommand ??= new RelayCommand(() => Login());
         public ICommand ContinueLoginCommand => _ContinueLoginCommand ??= new RelayCommand(() => OnLoginSuccess());
-        public ICommand GoToRegisterUser => _GoToRegisterUser ??= new RelayCommand(() => CurrentPage = ApplicationPage.Register);
+        public ICommand GoToRegisterUserCommand => _GoToRegisterUserCommand ??= new RelayCommand(() => CurrentPage = ApplicationPage.Register);
         public ICommand GoToLoginCommand => _GoToLoginCommand ??= new RelayCommand(() => CurrentPage = ApplicationPage.Login);
 
 
@@ -139,9 +139,15 @@ namespace TaskHub.ViewModels
         private void OnLoginSuccess() => LoginSuccessful?.Invoke(_User);
         public void Login()
         {
-            GetUser(_UserName, _PassW);
-            if (_PassW == _User.GetPass())
-                OnLoginSuccess();
+            if (DataAccess.CheckForUser(_UserName))
+            {
+                GetUser(_UserName, _PassW.ToString());
+                if (_PassW.ToString() == _User.GetPass())
+                    OnLoginSuccess();
+                    else
+                InvalidUserMsg = "Sorry User or Password incorrect. Please try again";
+            }
+            InvalidUserMsg = "Sorry User or Password incorrect. Please try again";
         }
 
         private void GetUser(string name, string pass)
@@ -152,12 +158,32 @@ namespace TaskHub.ViewModels
 
         private void RegisterNewUser()
         {
-            if (_PassW == null || _PassW.Length<5)
+            if (_PassW == null || _PassW.Length < 5)
             {
-                InvalidPasswordMsg = "The Password is need to be at least 5 Characters long!";
+                InvalidUserMsg = "The Password need to be at least 5 Characters long!";
+                return;
+            }
+            else if ( PassW != PassConf)
+            {
+                InvalidUserMsg = "The Password doesn't match!";
+                return;
+            }
+            else if (UserName.Length < 1 || DataAccess.CheckForUser(UserName))
+            {
+                InvalidUserMsg = $"sorry there is allready a User with the name{_UserName}";
+                return;
+            }
+            else
+            {
+                if (!DataAccess.CheckForUser(_UserName))
+                    RegisterNewUser();
             }
         }
 
+        private void InvalidUserMsgClear()
+        {
+            InvalidUserMsg = "";
+        }
         #endregion
     }
 }

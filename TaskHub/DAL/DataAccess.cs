@@ -55,19 +55,31 @@ namespace TaskHub.DAL
             }
         }
 
-        public static void GetUser(string userName)
+        public static bool CheckForUser(string userName)
         {
+
             try
             {
                 using (var con = new SqlConnection(@"Data Source=desktop-ihdvud3\sqlexpress;Initial Catalog=TaskTracker;Integrated Security=True"))
                 {
                     con.Query(@"dbo.SELECT_User, @UserName");
                 }
+                return true;
             }
-            catch
+            catch 
             {
-                throw new NotImplementedException();
+
+            return false;
             }
+        }
+
+        public static void GetUser(string userName)
+        {
+                using (var con = new SqlConnection(@"Data Source=desktop-ihdvud3\sqlexpress;Initial Catalog=TaskTracker;Integrated Security=True"))
+                {
+                    con.Query(@"dbo.SELECT_User, @UserName");
+                }
+            
         }
 
         public static string FetchPassword(string UserKey)

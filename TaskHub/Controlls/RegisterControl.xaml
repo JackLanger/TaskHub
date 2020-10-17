@@ -31,6 +31,7 @@
             <Setter Property="MaxLength" Value="20" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="5" />
         </Style>
         <Style TargetType="{x:Type PasswordBox}">
             <Style.Resources>
@@ -39,6 +40,7 @@
                 </Style>
             </Style.Resources>
             <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="33" />
             <Setter Property="HorizontalAlignment" Value="Right" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="FontFamily" Value="{StaticResource InterBold}" />
@@ -49,6 +51,7 @@
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="5" />
         </Style>
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="FontFamily" Value="{StaticResource InterBlack}"/>
@@ -99,7 +102,9 @@
     </UserControl.DataContext>
 
 
-    <Border Background="{StaticResource BlacPearlBrush}">
+    <Border
+        Background="{StaticResource BlacPearlBrush}"
+        >
         <Border.BitmapEffect>
             <DropShadowBitmapEffect
                 Color="{StaticResource LondonSquare}"
@@ -111,88 +116,95 @@
 
         <Grid>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <StackPanel
-                Margin="0 10 0 0"
-                Grid.Column="1"
-                Orientation="Vertical"
-                
-                >
-                <StackPanel
-                    Margin="5"
-                    Orientation="Vertical"
-                    >
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="User Name"/>
-                        <TextBlock Name="ErrorMsgUserName" 
-                                   Foreground="{StaticResource ChromeYellowBrush}" 
-                                   FontSize="{StaticResource FontSizeSmall}" Text=""/>
-                    </StackPanel>
-                    <Border>
-                        <TextBox
-                            Text="{Binding UserName}"
-                            Height="25"
-                            />
-                    </Border>
-                </StackPanel>
-                <StackPanel
-                    Margin="5"
-                    Orientation="Vertical"
-                    >
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Password"/>
-                        <TextBlock Name="errorMsgPw" 
-                                   Foreground="{StaticResource ChromeYellowBrush}" 
-                                   FontSize="{StaticResource FontSizeSmall}" Text=""/>
-                    </StackPanel>
-                    <Border>
-                        <PasswordBox
-                            Name="PWBox"
-                            PasswordChar="{Binding PassW}"
-                            Height="25"
-                            />
-                    </Border>
-                </StackPanel>
-                <StackPanel
-                    Margin="5"
-                    Orientation="Vertical"
-                    >
-                    <TextBlock Text="confirm Password"/>
-                    <Border>
-                        <PasswordBox
-                            Name="PWBoxConfirm"
-                            Height="25"
-                            />
-                    </Border>
-                </StackPanel>
-                <Button
-                    Command="{Binding RegisterNewUserCommand}"
-                    Content="Submit"
-                    >
-                    
-                </Button>
-                <Button
-                    Background="Transparent"
-                    BorderBrush="Transparent"
-                    Cursor="Hand"
-                    Width="auto"
-                    FontSize="{StaticResource FontSizeSmall}"
-                    Foreground="{StaticResource FreshSpeachBlueBrush}"
-                    Command="{Binding Path=GoToLoginCommand}"
-                    >I've allready got an account, Sign me In</Button>
-            </StackPanel>
             
+            <TextBlock 
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Text="User Name:"/>
+            <Border
+                Height="33"
+                Grid.Row="1"
+                Grid.Column="2"
+                >
+                <TextBox
+                    Height="33"
+                    Text="{Binding UserName,UpdateSourceTrigger=PropertyChanged}"
+                    />
+            </Border>
+
+            <TextBlock 
+                Grid.Row="2"
+                Grid.Column="1"
+                Text="Password:"/>
+            <Border
+                Grid.Row="2"
+                Grid.Column="2"
+                Height="33"
+                >
+                <PasswordBox/>
+            </Border>
+
+            <TextBlock 
+                Grid.Row="3"
+                Grid.Column="1"
+                Text="confirm:"/>
+            <Border
+                Grid.Row="3"
+                Grid.Column="2"
+                Height="33"
+                >
+                <PasswordBox/>
+            </Border>
+
+
+            <Button
+                Command="{Binding RegisterNewUserCommand}"
+                Grid.Row="4"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Content="Sign Up"
+                />
+
+            <Button
+                FontSize="{StaticResource FontSizeSmall}"
+                Foreground="{StaticResource FreshSpeachBlueBrush}"
+                Grid.Row="5"
+                Grid.Column="1"
+                Grid.ColumnSpan="3"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Cursor="Hand"
+                Width="auto"
+                Background="Transparent"
+                BorderThickness="0"
+                Content="Not signed up yet? Click here To Register!"
+                Command="{Binding Path=GoToLoginCommand}"
+                >
+            </Button>
+            <TextBlock Grid.Column="1"
+                       Grid.ColumnSpan="2"
+                       Grid.Row="6"
+                       TextWrapping="Wrap"
+                       Margin="0 40"
+                       Text="{Binding InvalidUserMsg, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                       Foreground="{StaticResource ChromeYellowBrush}"
+                       FontSize="{StaticResource FontSizeSmall}"
+                       />
         </Grid>
     </Border>
 </UserControl>

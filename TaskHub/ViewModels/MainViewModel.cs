@@ -29,7 +29,7 @@ namespace TaskHub.ViewModels
         private List<TaskModel> data = new List<TaskModel>();
         private TaskModel _ActiveTask;
         private TaskModel _TaskModel;
-        private ApplicationPage _CurrentPage = ApplicationPage.LoginPage;
+        private ApplicationPage _CurrentPage = ApplicationPage.Login;
         private LoginViewModel _loginViewModel;
 
         public LoginViewModel LoginViewModel
@@ -92,8 +92,10 @@ namespace TaskHub.ViewModels
         private ICommand _DataGridCommand;
         private ICommand _NewTaskCommand;
         private ICommand _LoginCommand;
+        private ICommand _GoToRegisterUser;
 
-        public ICommand LoginCommand => _LoginCommand ??= new RelayCommand(() => CurrentPage = ApplicationPage.LoginPage);
+        public ICommand LoginCommand => _LoginCommand ??= new RelayCommand(() => CurrentPage = ApplicationPage.Login);
+        public ICommand GoToRegisterUser => _GoToRegisterUser ??= new RelayCommand(() => CurrentPage = ApplicationPage.Register);
         public ICommand HomeCommand => _HomeCommand ??= new RelayCommand(() => CurrentPage = ApplicationPage.Home);
         public ICommand DataGridCommand => _DataGridCommand ??= new RelayCommand(() => CurrentPage = ApplicationPage.DataGrid);
         public ICommand NewTaskCommand => _NewTaskCommand ??= new RelayCommand(() => CurrentPage = ApplicationPage.NewTask);
@@ -130,11 +132,6 @@ namespace TaskHub.ViewModels
             _loginViewModel.LoginSuccessful += _loginViewModel_LoginSuccessful;
         }
 
-        private void _loginViewModel_ViewChanged(ApplicationPage page)
-        {
-            CurrentPage = _loginViewModel.CurrentPage;
-        }
-
         private void _loginViewModel_LoginSuccessful(object sender)
         {
             _User = sender as UserModel;
@@ -157,7 +154,7 @@ namespace TaskHub.ViewModels
         private void TaskVM_newOrUpdateEntry(TaskViewModel sender)
         {
             
-                    if (sender == TasksList[TasksList.Count - 1])
+            if (sender == TasksList[TasksList.Count - 1])
             {
                 sender.Model.NewEntry();
                 TasksList.Prepend(sender);
@@ -188,16 +185,6 @@ namespace TaskHub.ViewModels
 
         }
 
-        /// <summary>
-        /// TODo: remove from list and trigger delete from SQL DB on DAL
-        /// </summary>
-
-        /// <summary>
-        /// TODO: Check of Task and make inaccessible while marked as done
-        /// </summary>
-
         #endregion
-
-
     }
 }

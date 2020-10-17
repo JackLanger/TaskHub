@@ -10,17 +10,11 @@ using TaskHub.Model;
 namespace TaskHub
 {
 
-
     public class DeleteHelper:DependencyObject
     {
 
-        public static readonly DependencyProperty CanDeleteProperty = 
-            DependencyProperty.RegisterAttached(
-                "CanDelete", 
-                typeof(bool),
-                typeof(DeleteHelper),
-                new PropertyMetadata (false, OnCanDeleteChanged)
-                );
+        public static readonly DependencyProperty CanDeleteProperty = DependencyProperty.RegisterAttached("CanDelete", typeof(bool),typeof(DeleteHelper),
+                                                                                                           new PropertyMetadata (false, OnCanDeleteChanged));
 
         private static void OnCanDeleteChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -40,7 +34,7 @@ namespace TaskHub
             
         }
 
-        public static void SetCanDelete(DependencyObject target, Boolean value) => target.SetValue(CanDeleteProperty, value);
+        public static void SetCanDelete(DependencyObject target, bool value) => target.SetValue(CanDeleteProperty, value);
 
         public static bool GetCanDelete(DependencyObject target) => (bool)target.GetValue(CanDeleteProperty);
 

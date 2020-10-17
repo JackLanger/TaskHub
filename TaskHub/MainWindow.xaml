@@ -65,11 +65,10 @@
 
             </StackPanel.Resources>
 
+            <Button Command="{Binding Path=LoginCommand}">Login</Button>
+            <Button Command="{Binding Path=GoToRegisterUser}">Register User</Button>
             <Button Command="{Binding Path=HomeCommand}" >Home</Button>
             <Button Command="{Binding Path=DataGridCommand}">Grid view</Button>
-            <Button >Profile</Button>
-            <Button Command="{Binding Path=LoginCommand}">Login</Button>
-            <Button >Exit</Button>
 
         </StackPanel>
 

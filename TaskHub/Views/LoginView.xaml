@@ -22,7 +22,7 @@
             Padding="0"
             MinHeight="200"
             NavigationUIVisibility="Hidden"
-            Content="{Binding CurrentPage, Converter={local:AppPageValueConverter}}"
+            Content="{Binding CurrentPage, Converter={local:AppPageValueConverter},UpdateSourceTrigger=PropertyChanged}"
             Background="Transparent"
                 />
     </Grid>

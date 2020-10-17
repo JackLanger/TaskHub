@@ -97,6 +97,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controlls\AttachedPropertys\PasswordMatchHelper.cs" />
     <Compile Include="Controlls\Commands\ParameterizedRelayCommand.cs" />
     <Compile Include="Controlls\Commands\RelayCommand.cs" />
     <Compile Include="Controlls\AttachedPropertys\BackgroundHelper.cs" />
