@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TaskHub.Views
+namespace TaskHub
 {
     /// <summary>
-    /// Interaction logic for HomeView.xaml
+    /// Interaction logic for TextButtonControl.xaml
     /// </summary>
-    public partial class HomeView : Page
+    public partial class TextButtonControl : UserControl
     {
-        public HomeView()
+        public TextButtonControl()
         {
             InitializeComponent();
         }

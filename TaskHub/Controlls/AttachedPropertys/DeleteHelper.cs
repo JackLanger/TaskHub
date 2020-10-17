@@ -1,15 +1,9 @@
-﻿using System;
-using System.Data.Linq.Mapping;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using TaskHub.Model;
 
 
 namespace TaskHub
 {
-
     public class DeleteHelper:DependencyObject
     {
 
@@ -28,12 +22,10 @@ namespace TaskHub
             if ( (bool)e.NewValue)
                 delete.Click += Delete_Click;
         }
-
         private static void Delete_Click(object sender, RoutedEventArgs e)
         {
             
         }
-
         public static void SetCanDelete(DependencyObject target, bool value) => target.SetValue(CanDeleteProperty, value);
 
         public static bool GetCanDelete(DependencyObject target) => (bool)target.GetValue(CanDeleteProperty);

@@ -14,7 +14,6 @@ namespace TaskHub.Models
 
         private string _UserName;
         private string _UserType;
-        private string _Password;
 
         #endregion
 
@@ -40,22 +39,15 @@ namespace TaskHub.Models
             }
         }
 
-        public string Password
-        {
-            get { return _Password; }
-            set { _Password = value; }
-        }
-
         #endregion
 
         #region Constructor
 
-        public UserModel(string name, string password) : this(name, password, "standardUser") { }
+        public UserModel(string name) : this(name, "standardUser") { }
 
-        public UserModel(string name, string password, string Type = "standardUser")
+        public UserModel(string name, string Type = "standardUser")
         {
             _UserName = name;
-            _Password = password;
             UserType = Type;
         }
 

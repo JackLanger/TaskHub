@@ -57,7 +57,6 @@ namespace TaskHub.DAL
 
         public static bool CheckForUser(string userName)
         {
-
             try
             {
                 using (var con = new SqlConnection(@"Data Source=desktop-ihdvud3\sqlexpress;Initial Catalog=TaskTracker;Integrated Security=True"))
@@ -66,10 +65,9 @@ namespace TaskHub.DAL
                 }
                 return true;
             }
-            catch 
+            catch
             {
-
-            return false;
+                return false;
             }
         }
 

@@ -17,14 +17,10 @@ namespace TaskHub
         {
             object output = ((ApplicationPage)value) switch
             {
-                ApplicationPage.LoginPage => new LoginView(),
-                ApplicationPage.Login => new LoginControl(),
-                ApplicationPage.Register => new RegisterControl(),
-                ApplicationPage.Home => new TaskCardListControll(),
+                ApplicationPage.Home => new TaskCardListControl(),
                 ApplicationPage.DataGrid => new DataGridView(),
-                ApplicationPage.NewTask => new NewTaskView(),
 
-                _ => throw new NotImplementedException(),
+                _ => throw new NotImplementedException("page not found"),
             };
             return output;
         }
