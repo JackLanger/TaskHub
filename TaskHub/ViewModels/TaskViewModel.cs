@@ -112,7 +112,13 @@ namespace TaskHub.ViewModels
             if (_SubmitButtonText == "add")
                 newOrUpdateEntry?.Invoke(this);
 
-            else  _Model.IsActive = _Model.IsActive? false:true;
+            else
+            {
+                _Model.IsActive = _Model.IsActive ? false : true;
+                _Model.TaskStatus = _Model.IsActive?
+                                    _Model.TaskStatus = Enum.GetName(typeof(ActivityCheck), ActivityCheck.active) : _Model.TaskStatus = Enum.GetName(typeof(ActivityCheck), ActivityCheck.inactive);
+                _Model.UpdateEntry();
+            }
         }
 
         private void OnDeleteThis()

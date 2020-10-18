@@ -12,8 +12,6 @@
 
     <UserControl.Template>
         <ControlTemplate>
-
-
             <Border 
                 CornerRadius="10"
                 Background="White"
@@ -116,13 +114,13 @@
                                     ShadowDepth="3"
                                     />
                             </Border.BitmapEffect>
-                            <TextBlock 
+                            <!--<TextBlock 
                                 Text="{Binding Model.PostedBy}"
                                 Margin="5"
                                 FontWeight="Bold" 
                                 Padding="3"
                         Foreground="{StaticResource HintOfElusiveBlueBrush}"
-                                />
+                                />-->
                         </Border>
                     </WrapPanel>
 

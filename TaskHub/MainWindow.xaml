@@ -13,9 +13,9 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="165"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -71,16 +71,16 @@
         </StackPanel>
 
         <Frame 
-            Grid.Row="1"
-            Grid.RowSpan="3"
+            Grid.Row="0"
+            Grid.RowSpan="2"
             Grid.Column="1"
             Margin="0"
             Padding="0"
-            MinHeight="200"
+            MinHeight="600"
             Name="MainFrame"
             NavigationUIVisibility="Hidden"
             Content="{Binding CurrentPage , Converter={local:AppPageValueConverter}}"
-            Background="Transparent"
+            Background="Transparent" 
                 />
         <!--Row3-->
         <!--Row4-->

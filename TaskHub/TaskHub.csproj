@@ -101,6 +101,12 @@
     <Compile Include="Controlls\Commands\RelayCommand.cs" />
     <Compile Include="Controlls\AttachedPropertys\BackgroundHelper.cs" />
     <Compile Include="Controlls\AttachedPropertys\DeleteHelper.cs" />
+    <Compile Include="Controlls\ProjectControl.xaml.cs">
+      <DependentUpon>ProjectControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controlls\ProjectListControl.xaml.cs">
+      <DependentUpon>ProjectListControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controlls\TaskCardControll.xaml.cs">
       <DependentUpon>TaskCardControll.xaml</DependentUpon>
     </Compile>
@@ -121,19 +127,28 @@
     <Compile Include="Models\events\NewEntryEventArgs.cs" />
     <Compile Include="Models\events\StatusUpdateEventArgs.cs" />
     <Compile Include="Models\Exeption\InvalidInputException.cs" />
+    <Compile Include="Models\ProjectModel.cs" />
     <Compile Include="ValueConverters\ColorConverter.cs" />
     <Compile Include="ValueConverters\OpacityConverter.cs" />
     <Compile Include="ViewModels\Base\ModelBase.cs" />
     <Compile Include="Models\TaskModel.cs" />
     <Compile Include="Models\Enumeration\ActivityCheck.cs" />
-    <Compile Include="Models\UserModel.cs" />
     <Compile Include="ValueConverters\AppPageValueConverter.cs" />
     <Compile Include="ValueConverters\BaseValueConverter.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ProjectViewModel.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />
     <Compile Include="Views\DataGridView.xaml.cs">
       <DependentUpon>DataGridView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controlls\ProjectControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controlls\ProjectListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controlls\TaskCardControll.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

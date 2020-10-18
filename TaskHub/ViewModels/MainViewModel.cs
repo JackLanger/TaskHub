@@ -25,11 +25,22 @@ namespace TaskHub.ViewModels
 
         #region private members
         private ObservableCollection<TaskViewModel> _TasksList;
-        private UserModel _User;
+        private ObservableCollection<ProjectViewModel> _Projects;
         private List<TaskModel> data = new List<TaskModel>();
-        private TaskModel _ActiveTask;
         private TaskModel _TaskModel;
+        private ProjectViewModel _Project;
         private ApplicationPage _CurrentPage = ApplicationPage.Home;
+        private string _ProjectName;
+
+        public string ProjectName
+        {
+            get => _ProjectName;
+            set
+            {
+                _ProjectName = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ApplicationPage CurrentPage
         {
@@ -52,13 +63,12 @@ namespace TaskHub.ViewModels
             }
         }
 
-        public TaskModel ActiveTask
+        public ObservableCollection<ProjectViewModel> Projects
         {
-            get => _ActiveTask;
-            set
+            get => _Projects;
+            private set
             {
-                _ActiveTask = value;
-                OnPropertyChanged();
+                _Projects = value;
             }
         }
 
@@ -68,6 +78,7 @@ namespace TaskHub.ViewModels
             private set
             {
                 _TasksList = value;
+                OnPropertyChanged();
             }
         }
         #endregion
@@ -94,12 +105,20 @@ namespace TaskHub.ViewModels
 
         #region constructor
 
-
         public MainViewModel()
         {
-            data = DataAccess.ReadTaskDB().ToList();
-            TasksList = new ObservableCollection<TaskViewModel>();
 
+            _ProjectName = "";
+            data = (List<TaskModel>)DataAccess.ReadTaskDB();
+            
+            _TasksList = new ObservableCollection<TaskViewModel>();
+            _Projects = new ObservableCollection<ProjectViewModel>();
+
+            foreach (var project in DataAccess.ReadProjectDb())
+            {
+                _Projects.Add(new ProjectViewModel(project));
+                
+            }
 
             foreach (var task in DataAccess.ReadTaskDB())
             {
@@ -113,17 +132,28 @@ namespace TaskHub.ViewModels
                 taskVM.newOrUpdateEntry += TaskVM_newOrUpdateEntry;
             }
 
+            foreach ( var project in _Projects)
+            {
+                project.ActiveTasks = TasksList
+                                        .Where(t => t.Model.IsActive && t.Model.ProjectName == project.ProjectName)
+                                        .Count();
+            }
+            foreach(var p in _Projects)
+            {
+                p.FilterProjects += FilterProjects;
+            }
+
+            FilterProjects(TasksList[0].Model.ProjectName);
+            //_Projects.Add(new ProjectViewModel(new ProjectModel()));
+
         }
-
-
 
 
         #endregion
 
+
+
         #region Methods
-
-
-
 
         /// <summary>
         /// HACK: check if the sender is the last entry in the list if thats the case add new entry else update old one
@@ -136,8 +166,7 @@ namespace TaskHub.ViewModels
             {
                 sender.Model.NewEntry();
                 TasksList.Prepend(sender);
-                TasksList.Add(new TaskViewModel(new TaskModel()));
-
+                    TasksList.Add(new TaskViewModel(new TaskModel(_ProjectName)));
             }
             else
                 sender.Model.UpdateEntry();
@@ -162,6 +191,23 @@ namespace TaskHub.ViewModels
             }
 
         }
+
+        private void FilterProjects(string projectName)
+        {
+            var ol =data.Where(t => t.ProjectName == projectName).ToList();
+            foreach ( var p in _Projects)
+            {
+                if (projectName == p.ProjectName) _Project = p;
+            }
+            _ProjectName = _Project.ProjectName;
+
+            _TasksList.Clear();
+            foreach (var tvm in ol)
+            {
+                _TasksList.Add(new TaskViewModel(tvm));
+            }
+        }
+
         #endregion
     }
 }

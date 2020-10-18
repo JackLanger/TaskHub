@@ -16,13 +16,22 @@ namespace TaskHub.DAL
     {
         public static IList<TaskModel> ReadTaskDB()
         {
-
             IList<TaskModel> tasks = new List<TaskModel>();
             using (var con = new SqlConnection(@"Data Source=desktop-ihdvud3\sqlexpress;Initial Catalog=TaskTracker;Integrated Security=True"))
             {
                 tasks = con.Query<TaskModel>("dbo.SELECT_Tasks", new TaskModel()).ToList();
             }
             return tasks;
+        }
+
+        internal static IEnumerable<ProjectModel> ReadProjectDb()
+        {
+            IList<ProjectModel> projects = new List<ProjectModel>();
+            using (var con = new SqlConnection(@"Data Source=desktop-ihdvud3\sqlexpress;Initial Catalog=TaskTracker;Integrated Security=True"))
+            {
+                projects = con.Query<ProjectModel>("dbo.SELECT_Projects", new ProjectModel()).ToList();
+            }
+            return projects;
         }
 
         public static void UpdateDb( TaskModel model)
@@ -39,6 +48,7 @@ namespace TaskHub.DAL
                     , model);
             }
         }
+
         public static void WriteNewEntry( TaskModel model)
         {
 
@@ -55,53 +65,12 @@ namespace TaskHub.DAL
             }
         }
 
-        public static bool CheckForUser(string userName)
-        {
-            try
-            {
-                using (var con = new SqlConnection(@"Data Source=desktop-ihdvud3\sqlexpress;Initial Catalog=TaskTracker;Integrated Security=True"))
-                {
-                    con.Query(@"dbo.SELECT_User, @UserName");
-                }
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public static void GetUser(string userName)
-        {
-                using (var con = new SqlConnection(@"Data Source=desktop-ihdvud3\sqlexpress;Initial Catalog=TaskTracker;Integrated Security=True"))
-                {
-                    con.Query(@"dbo.SELECT_User, @UserName");
-                }
-            
-        }
-
-        public static string FetchPassword(string UserKey)
-        {
-            string pass ="";
-            using (var con = new SqlConnection(@"Data Source=desktop-ihdvud3\sqlexpress;Initial Catalog=TaskTracker;Integrated Security=True"))
-            {
-                pass = con.Query<string>(@"dbo.FetchPass, @UserKey").ToString();
-            }
-            return pass;
-        }
         public static void RemoveEntry(TaskModel model)
         {
             using (var con = new SqlConnection(@"Data Source=desktop-ihdvud3\sqlexpress;Initial Catalog=TaskTracker;Integrated Security=True"))
                 con.Execute(@"dbo.DELETE_Task @TaskID", model);
         }
 
-
-        public static void RegisterNewUser(UserModel user)
-        {
-            using( var con = new SqlConnection (@"Data Source=desktop-ihdvud3\sqlexpress;Initial Catalog=TaskTracker;Integrated Security=True"))
-            {
-                con.Execute(@"dbo.INSERT_User @UserName,@UserType");
-            }
-        }
+        
     }
 }

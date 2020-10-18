@@ -34,9 +34,19 @@ namespace TaskHub.Model
         public DateTime DateAdded { get; }
         private string _TaskName;
         private string _TaskDescription;
-        private string _PostedBy;
         private bool _IsActive;
         private string _TaskStatus;
+        private string _ProjectName;
+
+        public string ProjectName
+        {
+            get { return _ProjectName; }
+            set 
+            {
+                _ProjectName = value; OnPropertyChanged();
+            }
+        }
+
 
         #endregion
 
@@ -64,14 +74,6 @@ namespace TaskHub.Model
             }
         }
 
-        public string PostedBy
-        {
-            get => _PostedBy;
-            set
-            {
-                _PostedBy = value;
-            }
-        }
 
         public string TaskStatus
         {
@@ -93,19 +95,19 @@ namespace TaskHub.Model
         
         #region Constructor
 
-        public TaskModel() : this("new Task", "unknown", "description", "active", true)
-        {
+        public TaskModel() : this("new Task", "description", Enum.GetName(typeof(ActivityCheck),ActivityCheck.active), true, "")
+        { }
+        public TaskModel(string projectName) : this("new Task", "description", Enum.GetName(typeof(ActivityCheck), ActivityCheck.active), true, projectName) 
+        { }
 
-        }
-
-        public TaskModel(string name, string user, string descr, string status, bool active)
+        public TaskModel(string name, string descr, string status, bool active, string projectName)
         {
             DateAdded = DateTime.Now;
             _TaskName = name;
             _TaskDescription = descr;
-            _PostedBy = user;
             _TaskStatus = status;
             _IsActive = active;
+            _ProjectName = projectName;
         }
 
         #endregion
