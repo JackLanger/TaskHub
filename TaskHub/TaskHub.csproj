@@ -107,8 +107,8 @@
     <Compile Include="Controlls\ProjectListControl.xaml.cs">
       <DependentUpon>ProjectListControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controlls\TaskCardControll.xaml.cs">
-      <DependentUpon>TaskCardControll.xaml</DependentUpon>
+    <Compile Include="Controlls\TaskCardControl.xaml.cs">
+      <DependentUpon>TaskCardControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controlls\TaskCardListControl.xaml.cs">
       <DependentUpon>TaskCardListControl.xaml</DependentUpon>
@@ -149,7 +149,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controlls\TaskCardControll.xaml">
+    <Page Include="Controlls\TaskCardControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

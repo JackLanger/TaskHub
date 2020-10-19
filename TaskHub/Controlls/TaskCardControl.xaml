@@ -92,36 +92,12 @@
                         Margin="10 0"
                         Grid.Row="2"
                         Orientation="Horizontal">
-                    
+
                         <TextBlock 
                                 Margin="5"
                                 Text="{Binding Model.DateAdded, Mode=OneWay}"
                             VerticalAlignment="Center"
                                 />
-                        
-                        <Border
-                            CornerRadius="2"
-                            Background="{StaticResource FreshSpeachBlueBrush}"
-                            Margin="5"
-                            VerticalAlignment="Center"
-                            >
-                            <Border.BitmapEffect>
-                                <DropShadowBitmapEffect
-                                    Color="#808e9b" 
-                                    Direction="-50" 
-                                    Opacity="0.3" 
-                                    Softness="0.2"
-                                    ShadowDepth="3"
-                                    />
-                            </Border.BitmapEffect>
-                            <!--<TextBlock 
-                                Text="{Binding Model.PostedBy}"
-                                Margin="5"
-                                FontWeight="Bold" 
-                                Padding="3"
-                        Foreground="{StaticResource HintOfElusiveBlueBrush}"
-                                />-->
-                        </Border>
                     </WrapPanel>
 
 
@@ -135,7 +111,7 @@
                                 >
 
                         <StackPanel.Resources>
-                            <Style TargetType="{x:Type Button}">
+                            <Style  TargetType="{x:Type Button}">
                                 <Setter Property="Width" Value="50"/>
                                 <Setter Property="Margin" Value="5 0"/>
                                 <Setter Property="Cursor" Value="Hand"/>
@@ -181,11 +157,50 @@
                                 <Style TargetType="{x:Type Border}">
                                     <Setter Property="CornerRadius" Value="10"/>
                                 </Style>
+                                <Style TargetType="{x:Type Button}">                                    
+                                    <Setter Property="Width" Value="50"/>
+                                    <Setter Property="Margin" Value="5 0"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                    <Setter Property="HorizontalAlignment"  Value="Left"/>
+                                    <Setter Property="VerticalAlignment"    Value="Center"/>
+                                    <Setter Property="Background" Value="White" />
+                                    <Setter Property="Height" Value="23" />
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="BorderBrush" Value="{StaticResource LondonSquareBrush}"/>
+                                    <Setter Property="FontFamily" Value="{StaticResource InterLight}" />
+                                    <Setter Property="FontSize" Value="{StaticResource FontSizeSmall}"/>
+                                    <Setter Property="Foreground" Value="{StaticResource HintOfElusiveBlueBrush}"/>
+
+
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}">
+                                                    <ContentPresenter 
+                                        HorizontalAlignment="Center" 
+                                        VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+
+                                    <Style.Triggers>
+                                        <Trigger Property="IsFocused" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource RedOrangeBrush}"/>
+                                            <Setter Property="Foreground" Value="{StaticResource BlacPearlBrush}" />
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="BorderBrush" Value="{StaticResource RedOrangeBrush}" />
+                                            <Setter Property="Background" Value="{StaticResource HintOfElusiveBlueBrush}"/>
+                                            <Setter Property="Foreground" Value="{StaticResource BlacPearlBrush}" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
                             </Button.Resources>
                         </Button>
                         <Button 
                             Command="{Binding Path=MarkAsDoneCommand}"
-                            Uid="BtnDone"
+                            x:Name="BtnDone"
                             Content="{Binding SubmitButtonText}"
                             
                             >
