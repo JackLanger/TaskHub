@@ -101,11 +101,11 @@ namespace TaskHub.ViewModels
 
         #region Methods
 
+
         /// <summary>
-        /// TODO: implement check active  and CHeck Active COmmands 
+        /// íf <param name="_SubmitButtonText"></param> is equal to add create a new DB Entry and Instance of A TaskModel <param name="newOrUpdateEntry"></param>
+        /// else Update the DBEntry and TaskModel, set the Status of the Entry to either Active or Inactive
         /// </summary>
-
-
         private void OnNewOrUpdateEntry()
         {
 
@@ -121,6 +121,12 @@ namespace TaskHub.ViewModels
             }
         }
 
+
+        /// <summary>
+        /// if Button was pressed before delete the entry on first click set the button Text to Confirm.
+        /// 
+        /// BUG: !!! buttontext does not change on Realtime need a workarround -> hardcode in TaskCardControl
+        /// </summary>
         private void OnDeleteThis()
             
         {
