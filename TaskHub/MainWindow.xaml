@@ -79,7 +79,7 @@
             MinHeight="600"
             Name="MainFrame"
             NavigationUIVisibility="Hidden"
-            Content="{Binding CurrentPage , Converter={local:AppPageValueConverter}}"
+            Content="{Binding CurrentPage, Converter={local:AppPageValueConverter}}"
             Background="Transparent" 
                 />
         <!--Row3-->

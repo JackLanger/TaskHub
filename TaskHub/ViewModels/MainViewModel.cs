@@ -69,6 +69,7 @@ namespace TaskHub.ViewModels
             private set
             {
                 _Projects = value;
+                OnPropertyChanged();
             }
         }
 
@@ -107,12 +108,11 @@ namespace TaskHub.ViewModels
 
         public MainViewModel()
         {
-
             _ProjectName = "";
             data = (List<TaskModel>)DataAccess.ReadTaskDB();
-            
             _TasksList = new ObservableCollection<TaskViewModel>();
             _Projects = new ObservableCollection<ProjectViewModel>();
+
 
             foreach (var project in DataAccess.ReadProjectDb())
             {
@@ -142,10 +142,6 @@ namespace TaskHub.ViewModels
             {
                 p.FilterProjects += FilterProjects;
             }
-
-            FilterProjects(TasksList[0].Model.ProjectName);
-            //_Projects.Add(new ProjectViewModel(new ProjectModel()));
-
         }
 
 
@@ -166,12 +162,12 @@ namespace TaskHub.ViewModels
             {
                 sender.Model.NewEntry();
                 TasksList.Prepend(sender);
-                    TasksList.Add(new TaskViewModel(new TaskModel(_ProjectName)));
+                TasksList.Add(new TaskViewModel(new TaskModel(_ProjectName)));
             }
             else
                 sender.Model.UpdateEntry();
         }
-
+        
         private void Task_DeleteThis(TaskModel model, EventArgs deleteThisArgs)
         {
             for (int i = 0; i < TasksList.Count; i++)
@@ -189,22 +185,38 @@ namespace TaskHub.ViewModels
             {
                 _TasksList.Add(new TaskViewModel(task));
             }
-
         }
 
         private void FilterProjects(string projectName)
         {
-            var ol =data.Where(t => t.ProjectName == projectName).ToList();
-            foreach ( var p in _Projects)
-            {
-                if (projectName == p.ProjectName) _Project = p;
-            }
-            _ProjectName = _Project.ProjectName;
 
             _TasksList.Clear();
+
+            var ol = data.Where(t => t.ProjectName == projectName).ToList();
+
+            foreach (var p in _Projects)
+            {
+                if (projectName == p.ProjectName)
+                {
+                    _Project = p;
+                    break;
+                }
+            }
+
+            if (_Project != null)
+                _ProjectName = _Project.ProjectName;
+
+
+
             foreach (var tvm in ol)
             {
                 _TasksList.Add(new TaskViewModel(tvm));
+            }
+            _TasksList.Add(new TaskViewModel(new TaskModel()));
+
+            foreach (var task in TasksList)
+            {
+                task.newOrUpdateEntry += TaskVM_newOrUpdateEntry;
             }
         }
 

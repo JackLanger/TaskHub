@@ -57,7 +57,6 @@ namespace TaskHub.DAL
                 con.Execute(@"dbo.INSERT_Task 
                                                 @TaskName,
 	                                            @TaskDescription,
-	                                            @PostedBy,
 	                                            @DateAdded,
 	                                            @isActive,
 	                                            @TaskStatus
