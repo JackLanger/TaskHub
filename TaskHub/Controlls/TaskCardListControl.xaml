@@ -40,17 +40,17 @@
             <ViewModels:MainViewModel/>
         </Grid.DataContext>
 
-            <local:ProjectListControl
-                Grid.Row="0"/>
+        <local:ProjectListControl
+                Grid.Row="0"
+                />
         <ScrollViewer
                 Grid.Row="1"
             >
             
             <ItemsControl 
-                ItemsSource="{Binding TasksList}"
+                ItemsSource="{Binding TasksList, Mode=OneWay}"
                 Margin="5"
                 Padding="5" 
-                Grid.Column="0"
                 >
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>

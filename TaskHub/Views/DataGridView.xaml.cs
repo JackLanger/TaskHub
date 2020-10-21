@@ -19,7 +19,7 @@ using TaskHub.Model;
 using TaskHub.Models.events;
 using TaskHub.ViewModels;
 
-namespace TaskHub.Views
+namespace TaskHub
 {
     /// <summary>
     /// Interaction logic for DataGridView.xaml
@@ -30,11 +30,6 @@ namespace TaskHub.Views
         public DataGridView()
         {
             InitializeComponent();
-
-        }
-
-        private void DataGridTemplateColumn_Click(object sender, RoutedEventArgs e)
-        {
 
         }
     }

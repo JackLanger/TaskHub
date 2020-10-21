@@ -32,6 +32,18 @@ namespace TaskHub.ViewModels
         private ApplicationPage _CurrentPage = ApplicationPage.Home;
         private string _ProjectName;
 
+
+
+        public ObservableCollection<TaskViewModel> TasksList
+        {
+            get => _TasksList;
+            set
+            {
+                _TasksList = value;
+                OnPropertyChanged();
+            }
+        }
+
         public string ProjectName
         {
             get => _ProjectName;
@@ -73,15 +85,6 @@ namespace TaskHub.ViewModels
             }
         }
 
-        public ObservableCollection<TaskViewModel> TasksList
-        {
-            get => _TasksList;
-            private set
-            {
-                _TasksList = value;
-                OnPropertyChanged();
-            }
-        }
         #endregion
 
 
@@ -95,11 +98,13 @@ namespace TaskHub.ViewModels
 
         private ICommand _HomeCommand;
         private ICommand _DataGridCommand;
+        private ICommand _AddNewTaskCommand;
+        private ICommand _DeleteTaskCommand;
 
+        public ICommand DeleteTaskCommand => _DeleteTaskCommand ??= new RelayCommand(() => DeleteTask());
+        public ICommand AddNewTaskCommand => _AddNewTaskCommand ??= new RelayCommand(() => NewTask());
         public ICommand HomeCommand => _HomeCommand ??= new RelayCommand(() => CurrentPage = ApplicationPage.Home);
         public ICommand DataGridCommand => _DataGridCommand ??= new RelayCommand(() => CurrentPage = ApplicationPage.DataGrid);
-
-
         #endregion
 
 
@@ -155,6 +160,18 @@ namespace TaskHub.ViewModels
         /// HACK: check if the sender is the last entry in the list if thats the case add new entry else update old one
         /// </summary>
         /// <param name="sender"></param>
+        /// 
+
+        private void DeleteTask()
+        {
+            TasksList.RemoveAt(TasksList.Count - 1);
+        }
+        private void NewTask()
+        {
+            var newTask = new TaskViewModel(new TaskModel(_ProjectName));
+            TasksList.Add(newTask);
+            newTask.Model.NewEntry();
+        }
         private void TaskVM_newOrUpdateEntry(TaskViewModel sender)
         {
             
