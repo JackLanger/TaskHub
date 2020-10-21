@@ -93,7 +93,7 @@ namespace TaskHub.ViewModels
             _Model = model;
 
             _DelButtonText = "Delete";
-            _SubmitButtonText = _Model.TaskName == "new Task" ? "add" : "Done";
+            _SubmitButtonText = "Done";
         }
 
         #endregion
@@ -103,22 +103,13 @@ namespace TaskHub.ViewModels
 
 
         /// <summary>
-        /// íf <param name="_SubmitButtonText"></param> is equal to add create a new DB Entry and Instance of A TaskModel <param name="newOrUpdateEntry"></param>
-        /// else Update the DBEntry and TaskModel, set the Status of the Entry to either Active or Inactive
+        /// Switch between active and inactive state
         /// </summary>
         private void OnNewOrUpdateEntry()
         {
-
-            if (_SubmitButtonText == "add")
-                newOrUpdateEntry?.Invoke(this);
-
-            else
-            {
                 _Model.IsActive = _Model.IsActive ? false : true;
                 _Model.TaskStatus = _Model.IsActive?
                                     _Model.TaskStatus = Enum.GetName(typeof(ActivityCheck), ActivityCheck.active) : _Model.TaskStatus = Enum.GetName(typeof(ActivityCheck), ActivityCheck.inactive);
-                _Model.UpdateEntry();
-            }
         }
 
 
@@ -126,6 +117,8 @@ namespace TaskHub.ViewModels
         /// if Button was pressed before delete the entry on first click set the button Text to Confirm.
         /// 
         /// BUG: !!! buttontext does not change on Realtime need a workarround -> hardcode in TaskCardControl
+        /// 
+        /// TODO: use for multydelete!
         /// </summary>
         private void OnDeleteThis()
             

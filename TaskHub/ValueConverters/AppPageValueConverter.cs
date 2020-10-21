@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Navigation;
-using TaskHub.Views;
+using TaskHub;
 
 namespace TaskHub
 
@@ -18,7 +18,6 @@ namespace TaskHub
             object output = ((ApplicationPage)value) switch
             {
                 ApplicationPage.Home => new TaskCardListControl(),
-                ApplicationPage.DataGrid => new DataGridView(),
 
                 _ => throw new NotImplementedException("page not found"),
             };

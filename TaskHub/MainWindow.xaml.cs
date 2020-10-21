@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using TaskHub.Models.events;
 using TaskHub.ViewModels;
-using TaskHub.Views;
+using TaskHub;
 
 namespace TaskHub
 {
@@ -20,5 +20,6 @@ namespace TaskHub
             InitializeComponent();
         }
 
+        
     }
 }

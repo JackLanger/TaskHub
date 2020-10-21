@@ -9,13 +9,49 @@
         MinHeight="600" MinWidth="600"
         Opacity="1" Background="white"
         >
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="{StaticResource HintOfElusiveBlueBrush}"/>
+            <Setter Property="Background" Value="{StaticResource BlacPearlBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BlacPearlBrush}"/>
+            <Setter Property="FontFamily" Value="{StaticResource InterLight}"/>
+            <Setter Property="FontSize"  Value="{StaticResource FontSizeSmaller}"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+
+            <!--this is the mouse overpart-->
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter 
+                                        HorizontalAlignment="Center" 
+                                        VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource ChromeYellowBrush}"/>
+                    <Setter Property="Foreground" Value="{StaticResource BlacPearlBrush}" />
+                    <Setter Property="FontFamily" Value="{StaticResource InterExtraBold}" />
+                    <Setter Property="BorderThickness" Value="3" />
+                </Trigger>
+            </Style.Triggers>
+
+        </Style>
+    </Window.Resources>
 
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="165"/>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -25,63 +61,33 @@
 
 
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="6"
-                   Background="#1e272e">
-            <StackPanel.Resources>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Foreground" Value="{StaticResource HintOfElusiveBlueBrush}"/>
-                    <Setter Property="Background" Value="{StaticResource BlacPearlBrush}"/>
-                    <Setter Property="BorderBrush" Value="{StaticResource BlacPearlBrush}"/>
-                    <Setter Property="FontFamily" Value="{StaticResource InterLight}"/>
-                    <Setter Property="FontSize"  Value="{StaticResource FontSizeSmaller}"/>
-                    <Setter Property="Height" Value="50"/>
-                    <Setter Property="Width" Value="70"/>
-                    <Setter Property="Margin" Value="0"/>
-                    <Setter Property="Padding" Value="5"/>
-                    <Setter Property="Cursor" Value="Hand"/>
-
-                    <!--this is the mouse overpart-->
-
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}">
-                                    <ContentPresenter 
-                                        HorizontalAlignment="Center" 
-                                        VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource ChromeYellowBrush}"/>
-                            <Setter Property="Foreground" Value="{StaticResource BlacPearlBrush}" />
-                            <Setter Property="FontFamily" Value="{StaticResource InterExtraBold}" />
-                            <Setter Property="BorderThickness" Value="3" />
-                        </Trigger>
-                    </Style.Triggers>
-
-                </Style>
-
-            </StackPanel.Resources>
-
-            <Button Command="{Binding Path=HomeCommand}" >Home</Button>
-            <Button Command="{Binding Path=DataGridCommand}">Grid view</Button>
+                   Background="{StaticResource BlacPearlBrush}">
+            <Button Command="{Binding Path=AddNewTaskCommand}">Add Task</Button>
+            <Button Command="{Binding Path=DeleteTaskCommand}">DeleteTask</Button>
 
         </StackPanel>
-
-        <Frame 
-            Grid.Row="0"
-            Grid.RowSpan="2"
+        <local:ProjectListControl
+                Grid.Row="0"
+                Grid.Column="1"
+                />
+        
+        <ItemsControl
+            Grid.Row="1"
             Grid.Column="1"
             Margin="0"
-            Padding="0"
-            MinHeight="600"
-            Name="MainFrame"
-            NavigationUIVisibility="Hidden"
-            Content="{Binding CurrentPage, Converter={local:AppPageValueConverter}}"
-            Background="Transparent" 
-                />
+            ItemsSource="{Binding TasksList}"
+            >
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <local:TaskCardControll/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
         <!--Row3-->
         <!--Row4-->
         <!--Row5-->

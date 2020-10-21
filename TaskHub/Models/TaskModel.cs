@@ -61,6 +61,8 @@ namespace TaskHub.Model
                 if (value.Length > 0)
                 {
                     _TaskName = value;
+                    OnPropertyChanged();
+                    UpdateEntry();
                 }
             }
         }
@@ -71,6 +73,8 @@ namespace TaskHub.Model
             set
             {
                 _TaskDescription = value;
+                OnPropertyChanged();
+                UpdateEntry();
             }
         }
 
@@ -78,7 +82,12 @@ namespace TaskHub.Model
         public string TaskStatus
         {
             get => _TaskStatus;
-            set => _TaskStatus = value;
+            set
+            {
+                _TaskStatus = value;
+                OnPropertyChanged();
+                UpdateEntry();
+            }
         }
         public bool IsActive
         {
@@ -87,6 +96,7 @@ namespace TaskHub.Model
             {
                 _IsActive = value;
                 OnPropertyChanged();
+                UpdateEntry();
             }
         } 
 

@@ -13,7 +13,7 @@
     <UserControl.Resources>
         <Style TargetType="Border">
             <Setter Property="Margin" Value="10" />
-            <Setter Property="CornerRadius" Value="15"/>
+            <Setter Property="CornerRadius" Value="3"/>
             <Setter Property="Cursor" Value="Hand" />
             <Setter Property="Background" Value="{StaticResource LondonSquareBrush}" />
         </Style>

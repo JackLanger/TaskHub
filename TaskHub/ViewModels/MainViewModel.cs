@@ -29,8 +29,19 @@ namespace TaskHub.ViewModels
         private List<TaskModel> data = new List<TaskModel>();
         private TaskModel _TaskModel;
         private ProjectViewModel _Project;
-        private ApplicationPage _CurrentPage = ApplicationPage.Home;
         private string _ProjectName;
+
+
+
+        public ObservableCollection<TaskViewModel> TasksList
+        {
+            get => _TasksList;
+            set
+            {
+                _TasksList = value;
+                OnPropertyChanged();
+            }
+        }
 
         public string ProjectName
         {
@@ -42,15 +53,6 @@ namespace TaskHub.ViewModels
             }
         }
 
-        public ApplicationPage CurrentPage
-        {
-            get => _CurrentPage;
-            set 
-            { 
-                _CurrentPage = value;
-                OnPropertyChanged();
-            }
-        }
 
 
         public TaskModel taskModel
@@ -73,15 +75,6 @@ namespace TaskHub.ViewModels
             }
         }
 
-        public ObservableCollection<TaskViewModel> TasksList
-        {
-            get => _TasksList;
-            private set
-            {
-                _TasksList = value;
-                OnPropertyChanged();
-            }
-        }
         #endregion
 
 
@@ -92,14 +85,11 @@ namespace TaskHub.ViewModels
         /// TODO: create all task commands needed for nav buttons and the card buttons
         /// </summary>
         /// 
+        private ICommand _AddNewTaskCommand;
+        private ICommand _DeleteTaskCommand;
 
-        private ICommand _HomeCommand;
-        private ICommand _DataGridCommand;
-
-        public ICommand HomeCommand => _HomeCommand ??= new RelayCommand(() => CurrentPage = ApplicationPage.Home);
-        public ICommand DataGridCommand => _DataGridCommand ??= new RelayCommand(() => CurrentPage = ApplicationPage.DataGrid);
-
-
+        public ICommand DeleteTaskCommand => _DeleteTaskCommand ??= new RelayCommand(() => DeleteTask());
+        public ICommand AddNewTaskCommand => _AddNewTaskCommand ??= new RelayCommand(() => NewTask());
         #endregion
 
 
@@ -125,7 +115,6 @@ namespace TaskHub.ViewModels
                 TasksList.Add(new TaskViewModel(task));
                 task.DeleteThis += Task_DeleteThis;
             }
-            TasksList.Add(new TaskViewModel(new TaskModel()));
 
             foreach ( var taskVM in TasksList)
             {
@@ -155,14 +144,33 @@ namespace TaskHub.ViewModels
         /// HACK: check if the sender is the last entry in the list if thats the case add new entry else update old one
         /// </summary>
         /// <param name="sender"></param>
+        /// 
+
+        private void DeleteTask()
+        {
+            var del = TasksList.Where(t => t.CanDelete).ToArray();
+
+            for (int i = 0; i < del.Length; i++)
+            {
+                del[i].Model.DeleteEntry();
+                TasksList.Remove(del[i]);
+            }
+
+        }
+        private void NewTask()
+        {
+            var newTask = new TaskViewModel(new TaskModel(_ProjectName));
+            _TasksList.Add(newTask);
+            newTask.Model.NewEntry();
+        }
         private void TaskVM_newOrUpdateEntry(TaskViewModel sender)
         {
             
             if (sender == TasksList[TasksList.Count - 1])
             {
                 sender.Model.NewEntry();
-                TasksList.Prepend(sender);
-                TasksList.Add(new TaskViewModel(new TaskModel(_ProjectName)));
+                _TasksList.Prepend(sender);
+                _TasksList.Add(new TaskViewModel(new TaskModel(_ProjectName)));
             }
             else
                 sender.Model.UpdateEntry();
@@ -173,7 +181,7 @@ namespace TaskHub.ViewModels
             for (int i = 0; i < TasksList.Count; i++)
             {
                 if ( TasksList[i].Model == model)
-                TasksList.RemoveAt(i); 
+                _TasksList.RemoveAt(i); 
             }
         }
         public void FilterData(string filter)
@@ -186,37 +194,18 @@ namespace TaskHub.ViewModels
                 _TasksList.Add(new TaskViewModel(task));
             }
         }
-
+        /// <summary>
+        /// BUG: View not updating
+        /// </summary>
+        /// <param name="projectName"></param>
         private void FilterProjects(string projectName)
         {
+            var filteredList = DataAccess.ReadTaskDB().Where(t => t.ProjectName == projectName).ToArray();
+            TasksList.Clear();
 
-            _TasksList.Clear();
-
-            var ol = data.Where(t => t.ProjectName == projectName).ToList();
-
-            foreach (var p in _Projects)
+            for (int i = 0; i < filteredList.Length; i++)
             {
-                if (projectName == p.ProjectName)
-                {
-                    _Project = p;
-                    break;
-                }
-            }
-
-            if (_Project != null)
-                _ProjectName = _Project.ProjectName;
-
-
-
-            foreach (var tvm in ol)
-            {
-                _TasksList.Add(new TaskViewModel(tvm));
-            }
-            _TasksList.Add(new TaskViewModel(new TaskModel()));
-
-            foreach (var task in TasksList)
-            {
-                task.newOrUpdateEntry += TaskVM_newOrUpdateEntry;
+                TasksList.Add(new TaskViewModel(filteredList[i]));
             }
         }
 
