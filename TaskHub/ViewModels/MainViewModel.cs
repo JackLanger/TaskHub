@@ -194,37 +194,18 @@ namespace TaskHub.ViewModels
                 _TasksList.Add(new TaskViewModel(task));
             }
         }
-
+        /// <summary>
+        /// BUG: View not updating
+        /// </summary>
+        /// <param name="projectName"></param>
         private void FilterProjects(string projectName)
         {
+            var filteredList = DataAccess.ReadTaskDB().Where(t => t.ProjectName == projectName).ToArray();
+            TasksList.Clear();
 
-            _TasksList.Clear();
-
-            var ol = data.Where(t => t.ProjectName == projectName).ToList();
-
-            foreach (var p in _Projects)
+            for (int i = 0; i < filteredList.Length; i++)
             {
-                if (projectName == p.ProjectName)
-                {
-                    _Project = p;
-                    break;
-                }
-            }
-
-            if (_Project != null)
-                _ProjectName = _Project.ProjectName;
-
-
-
-            foreach (var tvm in ol)
-            {
-                _TasksList.Add(new TaskViewModel(tvm));
-            }
-            _TasksList.Add(new TaskViewModel(new TaskModel()));
-
-            foreach (var task in TasksList)
-            {
-                task.newOrUpdateEntry += TaskVM_newOrUpdateEntry;
+                TasksList.Add(new TaskViewModel(filteredList[i]));
             }
         }
 

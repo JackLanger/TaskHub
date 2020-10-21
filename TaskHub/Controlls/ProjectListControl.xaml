@@ -18,18 +18,13 @@
             <Setter Property="Background" Value="{StaticResource HintOfElusiveBlueBrush}"/>
         </Style>
     </UserControl.Resources>
-    <Grid 
-            >
-        <Grid.DataContext>
-            <ViewModels:MainViewModel/>
-        </Grid.DataContext>
+    <Grid>
 
         <ScrollViewer>
             <ItemsControl 
                 ItemsSource="{Binding Projects}"
                 Margin="5"
                 Padding="5" 
-                Grid.Column="0"
                 >
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
