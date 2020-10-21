@@ -152,6 +152,7 @@
                             Command="{Binding Path=DeleteCommand}"
                             Content="{Binding DelButtonText, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                             x:Name="DelButton"
+                           Click="DelButton_Click"
                             >
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">

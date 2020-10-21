@@ -69,5 +69,11 @@ namespace TaskHub
             else return;
         }
 
+        private void DelButton_Click(object sender, RoutedEventArgs e)
+        {
+            var btn = sender as Button;
+
+            btn.Background = Brushes.OrangeRed;
+        }
     }
 }

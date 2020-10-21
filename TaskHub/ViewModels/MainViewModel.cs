@@ -29,7 +29,6 @@ namespace TaskHub.ViewModels
         private List<TaskModel> data = new List<TaskModel>();
         private TaskModel _TaskModel;
         private ProjectViewModel _Project;
-        private ApplicationPage _CurrentPage = ApplicationPage.Home;
         private string _ProjectName;
 
 
@@ -54,15 +53,6 @@ namespace TaskHub.ViewModels
             }
         }
 
-        public ApplicationPage CurrentPage
-        {
-            get => _CurrentPage;
-            set 
-            { 
-                _CurrentPage = value;
-                OnPropertyChanged();
-            }
-        }
 
 
         public TaskModel taskModel
@@ -95,16 +85,11 @@ namespace TaskHub.ViewModels
         /// TODO: create all task commands needed for nav buttons and the card buttons
         /// </summary>
         /// 
-
-        private ICommand _HomeCommand;
-        private ICommand _DataGridCommand;
         private ICommand _AddNewTaskCommand;
         private ICommand _DeleteTaskCommand;
 
         public ICommand DeleteTaskCommand => _DeleteTaskCommand ??= new RelayCommand(() => DeleteTask());
         public ICommand AddNewTaskCommand => _AddNewTaskCommand ??= new RelayCommand(() => NewTask());
-        public ICommand HomeCommand => _HomeCommand ??= new RelayCommand(() => CurrentPage = ApplicationPage.Home);
-        public ICommand DataGridCommand => _DataGridCommand ??= new RelayCommand(() => CurrentPage = ApplicationPage.DataGrid);
         #endregion
 
 
@@ -130,7 +115,6 @@ namespace TaskHub.ViewModels
                 TasksList.Add(new TaskViewModel(task));
                 task.DeleteThis += Task_DeleteThis;
             }
-            TasksList.Add(new TaskViewModel(new TaskModel()));
 
             foreach ( var taskVM in TasksList)
             {
@@ -164,12 +148,19 @@ namespace TaskHub.ViewModels
 
         private void DeleteTask()
         {
-            TasksList.RemoveAt(TasksList.Count - 1);
+            var del = TasksList.Where(t => t.CanDelete).ToArray();
+
+            for (int i = 0; i < del.Length; i++)
+            {
+                del[i].Model.DeleteEntry();
+                TasksList.Remove(del[i]);
+            }
+
         }
         private void NewTask()
         {
             var newTask = new TaskViewModel(new TaskModel(_ProjectName));
-            TasksList.Add(newTask);
+            _TasksList.Add(newTask);
             newTask.Model.NewEntry();
         }
         private void TaskVM_newOrUpdateEntry(TaskViewModel sender)
@@ -178,8 +169,8 @@ namespace TaskHub.ViewModels
             if (sender == TasksList[TasksList.Count - 1])
             {
                 sender.Model.NewEntry();
-                TasksList.Prepend(sender);
-                TasksList.Add(new TaskViewModel(new TaskModel(_ProjectName)));
+                _TasksList.Prepend(sender);
+                _TasksList.Add(new TaskViewModel(new TaskModel(_ProjectName)));
             }
             else
                 sender.Model.UpdateEntry();
@@ -190,7 +181,7 @@ namespace TaskHub.ViewModels
             for (int i = 0; i < TasksList.Count; i++)
             {
                 if ( TasksList[i].Model == model)
-                TasksList.RemoveAt(i); 
+                _TasksList.RemoveAt(i); 
             }
         }
         public void FilterData(string filter)

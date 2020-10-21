@@ -18,7 +18,6 @@ namespace TaskHub
             object output = ((ApplicationPage)value) switch
             {
                 ApplicationPage.Home => new TaskCardListControl(),
-                ApplicationPage.DataGrid => new DataGridView(),
 
                 _ => throw new NotImplementedException("page not found"),
             };
