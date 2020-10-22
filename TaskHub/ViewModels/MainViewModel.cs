@@ -119,7 +119,12 @@ namespace TaskHub.ViewModels
             data = (List<TaskModel>)DataAccess.ReadTaskDB();
             _TasksList = new ObservableCollection<TaskViewModel>();
             _Projects = new ObservableCollection<ProjectViewModel>();
-            _Project = new ProjectViewModel(new ProjectModel("show All"));
+            _Project = new ProjectViewModel(
+                                            new ProjectModel(
+                                                "show All",
+                                                _Projects.Last()
+                                                .Project
+                                                .ProjectID++));
             _Projects.Add(_Project);
 
             foreach (var project in DataAccess.ReadProjectDb())
