@@ -121,10 +121,7 @@ namespace TaskHub.ViewModels
             _Projects = new ObservableCollection<ProjectViewModel>();
             _Project = new ProjectViewModel(
                                             new ProjectModel(
-                                                "show All",
-                                                _Projects.Last()
-                                                .Project
-                                                .ProjectID++));
+                                                "show All",0));
             _Projects.Add(_Project);
 
             foreach (var project in DataAccess.ReadProjectDb())
@@ -185,7 +182,11 @@ namespace TaskHub.ViewModels
         /// </summary>
         private void NewProject(string name)
         {
-            _Projects.Add(new ProjectViewModel(new ProjectModel(name, _Projects[_Projects.Count() - 1].Project.ProjectID++)));
+            _Projects.Add(new ProjectViewModel(new ProjectModel(name, 
+                                                                _Projects
+                                                                .Last()
+                                                                .Project.ProjectID++)));
+
             _Projects[_Projects.Count() - 1].Project.Create();
         }
         /// <summary>
