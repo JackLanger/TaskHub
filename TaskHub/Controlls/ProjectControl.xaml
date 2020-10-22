@@ -15,10 +15,11 @@
             <Setter Property="Margin" Value="10" />
             <Setter Property="CornerRadius" Value="3"/>
             <Setter Property="Cursor" Value="Hand" />
-            <Setter Property="Background" Value="{StaticResource LondonSquareBrush}" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{StaticResource BlacPearlBrush}" />
         </Style>
         <Style TargetType="TextBlock">
-            <Setter Property="Foreground" Value="{StaticResource HintOfElusiveBlueBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource BlacPearlBrush}"/>
             <Setter Property="Height" Value="auto" />
             <Setter Property="FontSize" Value="{StaticResource FontSizeRegular}" />
             <Setter Property="FontFamily" Value="{StaticResource InterExtraBold}" />
@@ -78,7 +79,7 @@
                         CornerRadius="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
                         BorderBrush="{StaticResource FreshSpeachBlueBrush}"
                         BorderThickness="3"
-                        VerticalAlignment="Bottom"
+                        Margin="-5"
                         >
                         <TextBlock 
                             VerticalAlignment="Center"

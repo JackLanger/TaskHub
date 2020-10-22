@@ -48,6 +48,17 @@ namespace TaskHub.DAL
                     , model);
             }
         }
+        public static void UpdateDb( ProjectModel project)
+        {
+
+            using (var con = new SqlConnection(@"Data Source=desktop-ihdvud3\sqlexpress;Initial Catalog=TaskTracker;Integrated Security=True"))
+            {
+                con.Execute("dbo.UPDATE_Project " +
+                    "@ProjectID,"+
+                    "@ProjectName"
+                    , project);
+            }
+        }
 
         public static void WriteNewEntry( TaskModel model)
         {
@@ -63,13 +74,28 @@ namespace TaskHub.DAL
                                                 ", model);
             }
         }
+        
+        public static void WriteNewEntry( ProjectModel project)
+        {
+
+            using (var con = new SqlConnection(@"Data Source=desktop-ihdvud3\sqlexpress;Initial Catalog=TaskTracker;Integrated Security=True"))
+            {
+                con.Execute(@"dbo.INSERT_Project 
+                                                @ProjectName,
+                                                @ProjectID
+                                                ", project);
+            }
+        }
 
         public static void RemoveEntry(TaskModel model)
         {
             using (var con = new SqlConnection(@"Data Source=desktop-ihdvud3\sqlexpress;Initial Catalog=TaskTracker;Integrated Security=True"))
                 con.Execute(@"dbo.DELETE_Task @TaskID", model);
         }
-
-        
+        public static void RemoveEntry(ProjectModel project)
+        {
+            using (var con = new SqlConnection(@"Data Source=desktop-ihdvud3\sqlexpress;Initial Catalog=TaskTracker;Integrated Security=True"))
+                con.Execute(@"dbo.Remove_Project @ProjectID", project);
+        }        
     }
 }

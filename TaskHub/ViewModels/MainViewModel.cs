@@ -30,6 +30,17 @@ namespace TaskHub.ViewModels
         private TaskModel _TaskModel;
         private ProjectViewModel _Project;
         private string _ProjectName;
+        private string _NewProjectName;
+
+        public string NewProjectName
+        {
+            get => _NewProjectName;
+            set {
+                _NewProjectName = value;
+                OnPropertyChanged();
+            }
+        }
+
 
 
 
@@ -87,9 +98,15 @@ namespace TaskHub.ViewModels
         /// 
         private ICommand _AddNewTaskCommand;
         private ICommand _DeleteTaskCommand;
+        private ICommand _DeleteProjectCommand;
+        private ICommand _NewProjectCommand;
+
 
         public ICommand DeleteTaskCommand => _DeleteTaskCommand ??= new RelayCommand(() => DeleteTask());
         public ICommand AddNewTaskCommand => _AddNewTaskCommand ??= new RelayCommand(() => NewTask());
+        public ICommand NewProjectCommand => _NewProjectCommand ??= new ParameterizedRelayCommand<string>((param) => NewProject(param));
+        public ICommand DeleteProjectCommand => _DeleteProjectCommand ??= new RelayCommand(() => DeleteProject());
+
         #endregion
 
 
@@ -102,12 +119,17 @@ namespace TaskHub.ViewModels
             data = (List<TaskModel>)DataAccess.ReadTaskDB();
             _TasksList = new ObservableCollection<TaskViewModel>();
             _Projects = new ObservableCollection<ProjectViewModel>();
-
+            _Project = new ProjectViewModel(new ProjectModel("show All"));
+            _Projects.Add(_Project);
 
             foreach (var project in DataAccess.ReadProjectDb())
             {
                 _Projects.Add(new ProjectViewModel(project));
-                
+            }
+
+            foreach (var pvm in _Projects)
+            {
+                if (pvm.Project.ProjectID == 0) pvm.Project.ProjectID = _Projects.Last().Project.ProjectID++;
             }
 
             foreach (var task in DataAccess.ReadTaskDB())
@@ -123,9 +145,20 @@ namespace TaskHub.ViewModels
 
             foreach ( var project in _Projects)
             {
-                project.ActiveTasks = TasksList
-                                        .Where(t => t.Model.IsActive && t.Model.ProjectName == project.ProjectName)
-                                        .Count();
+
+                if (project.ProjectName=="show All")
+                {
+                    project.ActiveTasks = TasksList
+                                          .Where(t => t.Model.IsActive)
+                                          .Count();
+                }
+                else
+                {
+
+                    project.ActiveTasks = TasksList
+                                          .Where(t => t.Model.IsActive && t.Model.ProjectName == project.ProjectName)
+                                          .Count();
+                }
             }
             foreach(var p in _Projects)
             {
@@ -141,11 +174,31 @@ namespace TaskHub.ViewModels
         #region Methods
 
         /// <summary>
-        /// HACK: check if the sender is the last entry in the list if thats the case add new entry else update old one
+        /// TODO: add new Project on button press and populate the project with a standard name like new Project.
+        ///         write project to DB
+        /// TODO: add a delete button for the project selected.
         /// </summary>
-        /// <param name="sender"></param>
-        /// 
+        private void NewProject(string name)
+        {
+            _Projects.Add(new ProjectViewModel(new ProjectModel(name, _Projects[_Projects.Count() - 1].Project.ProjectID++)));
+            _Projects[_Projects.Count() - 1].Project.Create();
+        }
+        /// <summary>
+        /// delete the selected project from db and remove from list
+        /// </summary>
+        /// <param name="projectName"></param>
+        private void DeleteProject()
+        {
+            if (_ProjectName != null && _Projects.Any(p=> p .ProjectName == _ProjectName)){
+                ProjectViewModel ProjectVM = _Projects.First(p => p.ProjectName == _ProjectName);
 
+                DataAccess.RemoveEntry(ProjectVM.Project);
+                _Projects.Remove(ProjectVM);
+            }
+        }
+        /// <summary>
+        /// delete all tasks where CanDelete is true
+        /// </summary>
         private void DeleteTask()
         {
             var del = TasksList.Where(t => t.CanDelete).ToArray();
@@ -155,8 +208,10 @@ namespace TaskHub.ViewModels
                 del[i].Model.DeleteEntry();
                 TasksList.Remove(del[i]);
             }
-
         }
+        /// <summary>
+        /// add a new Task to the list and create a new entry in the db
+        /// </summary>
         private void NewTask()
         {
             var newTask = new TaskViewModel(new TaskModel(_ProjectName));
@@ -184,29 +239,26 @@ namespace TaskHub.ViewModels
                 _TasksList.RemoveAt(i); 
             }
         }
-        public void FilterData(string filter)
-        {
-            _TasksList.Clear();
-            var filteredData = data.Where(x => x.TaskStatus == filter).Select(t => t).ToList();
-
-            foreach (var task in filteredData)
-            {
-                _TasksList.Add(new TaskViewModel(task));
-            }
-        }
         /// <summary>
-        /// BUG: View not updating
+        /// if the projectname == show All select all tasks, else select the tasks with the given project name
         /// </summary>
         /// <param name="projectName"></param>
         private void FilterProjects(string projectName)
         {
             var filteredList = DataAccess.ReadTaskDB().Where(t => t.ProjectName == projectName).ToArray();
+
+            if (projectName == "show All")
+            {
+                filteredList = DataAccess.ReadTaskDB().ToArray();
+            }
+
             TasksList.Clear();
 
             for (int i = 0; i < filteredList.Length; i++)
             {
                 TasksList.Add(new TaskViewModel(filteredList[i]));
             }
+            _ProjectName = projectName;
         }
 
         #endregion
