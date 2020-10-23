@@ -198,7 +198,7 @@ namespace TaskHub.ViewModels
             if (_ProjectName != null && _Projects.Any(p=> p .ProjectName == _ProjectName)){
                 ProjectViewModel ProjectVM = _Projects.First(p => p.ProjectName == _ProjectName);
 
-                DataAccess.RemoveEntry(ProjectVM.Project);
+                ProjectVM.Project.Delete();
                 _Projects.Remove(ProjectVM);
             }
         }
@@ -220,7 +220,7 @@ namespace TaskHub.ViewModels
         /// </summary>
         private void NewTask()
         {
-            var newTask = new TaskViewModel(new TaskModel(_ProjectName));
+            var newTask = new TaskViewModel(new TaskModel(_ProjectName,_TasksList.Last().Model.TaskId++));
             _TasksList.Add(newTask);
             newTask.Model.NewEntry();
         }
@@ -231,7 +231,7 @@ namespace TaskHub.ViewModels
             {
                 sender.Model.NewEntry();
                 _TasksList.Prepend(sender);
-                _TasksList.Add(new TaskViewModel(new TaskModel(_ProjectName)));
+                _TasksList.Add(new TaskViewModel(new TaskModel(_ProjectName, _TasksList.Last().Model.TaskId++)));
             }
             else
                 sender.Model.UpdateEntry();

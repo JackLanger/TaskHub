@@ -105,12 +105,12 @@ namespace TaskHub.Model
         
         #region Constructor
 
-        public TaskModel() : this("new Task", "description", Enum.GetName(typeof(ActivityCheck),ActivityCheck.active), true, "")
+        public TaskModel() : this("new Task", "description", Enum.GetName(typeof(ActivityCheck),ActivityCheck.active), true, "",0)
         { }
-        public TaskModel(string projectName) : this("new Task", "description", Enum.GetName(typeof(ActivityCheck), ActivityCheck.active), true, projectName) 
+        public TaskModel(string projectName,int id) : this("new Task", "description", Enum.GetName(typeof(ActivityCheck), ActivityCheck.active), true, projectName,id) 
         { }
 
-        public TaskModel(string name, string descr, string status, bool active, string projectName)
+        public TaskModel(string name, string descr, string status, bool active, string projectName, int id)
         {
             DateAdded = DateTime.Now;
             _TaskName = name;
@@ -118,6 +118,7 @@ namespace TaskHub.Model
             _TaskStatus = status;
             _IsActive = active;
             _ProjectName = projectName;
+            TaskId = id;
         }
 
         #endregion
