@@ -131,7 +131,7 @@ namespace TaskHub.ViewModels
 
             foreach (var pvm in _Projects)
             {
-                if (pvm.Project.ProjectID == 0) pvm.Project.ProjectID = _Projects.Last().Project.ProjectID++;
+                if (pvm.Project.ProjectID == 0) pvm.Project.ProjectID = _Projects.Last().Project.ProjectID+1;
             }
 
             foreach (var task in DataAccess.ReadTaskDB())
@@ -220,7 +220,7 @@ namespace TaskHub.ViewModels
         /// </summary>
         private void NewTask()
         {
-            var newTask = new TaskViewModel(new TaskModel(_ProjectName,_TasksList.Last().Model.TaskId++));
+            var newTask = new TaskViewModel(new TaskModel(_ProjectName,_TasksList.Last().Model.TaskId+1));
             _TasksList.Add(newTask);
             newTask.Model.NewEntry();
         }
@@ -231,7 +231,7 @@ namespace TaskHub.ViewModels
             {
                 sender.Model.NewEntry();
                 _TasksList.Prepend(sender);
-                _TasksList.Add(new TaskViewModel(new TaskModel(_ProjectName, _TasksList.Last().Model.TaskId++)));
+                _TasksList.Add(new TaskViewModel(new TaskModel(_ProjectName, _TasksList.Last().Model.TaskId+1)));
             }
             else
                 sender.Model.UpdateEntry();
