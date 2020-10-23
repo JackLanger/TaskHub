@@ -8,8 +8,7 @@ this is a sideproject that is meant to give me some insight into wpf and deeper 
 - a Grid View
 - adding, deleting Tasks as well as updating (SQL DATABASE with simpe CRUD operations)
 - checking and un checking tasks
-
-<b> currently I'm working on:</b>
-- filtering tasks by projects
+- adding deleting Projects
+- filter by project
 
 any help and advice is allways welcome
